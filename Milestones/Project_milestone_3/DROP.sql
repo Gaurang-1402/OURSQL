@@ -1,7 +1,10 @@
-DROP TABLE appeals IF exists;
-DROP TABLE crime_charges IF exists;
-DROP TABLE sentences IF exists;
-DROP TABLE prob_officer IF exists;
-DROP TABLE crimes IF exists;
-DROP TABLE alias IF exists;
-DROP TABLE criminals IF exists;
+DROP TABLE appeals IF EXISTS;
+DROP TABLE crime_officers IF EXISTS;
+DROP TABLE officers IF EXISTS;
+DROP TABLE crime_charges IF EXISTS;
+DROP TABLE crime_codes IF EXISTS;
+DROP TABLE sentences IF EXISTS;
+DROP TABLE prob_officer IF EXISTS;
+DROP TABLE crimes IF EXISTS;
+DROP TABLE alias IF EXISTS;
+DROP TABLE criminals IF EXISTS;
