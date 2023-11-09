@@ -31,8 +31,9 @@ CREATE TABLE crimes (
     classification CHAR(1) DEFAULT 'U',
     date_charged DATE,
     status CHAR(2) NOT NULL,
-    hearing_date DATE CHECK (hearing_date > date_charged),
+    hearing_date DATE,
     appeal_cut_date DATE,
+    CONSTRAINT crime_date_chk CHECK (hearing_date > date_charged),
     PRIMARY KEY (crime_id),
     FOREIGN KEY (criminal_id) REFERENCES criminals(criminal_id)
 );
@@ -61,8 +62,9 @@ CREATE TABLE sentences (
     type CHAR(1),
     prob_id NUMERIC(5),
     start_date DATE,
-    end_date DATE CHECK (end_date),
+    end_date DATE,
     violations NUMERIC(3) NOT NULL,
+    CONSTRAINT sentence_date_chk CHECK (end_date > start_date),
     PRIMARY KEY(sentence_id),
     FOREIGN KEY(criminal_id) REFERENCES criminals(criminal_id),
     FOREIGN KEY(prob_id) REFERENCES prob_officer(prob_id)
@@ -89,7 +91,7 @@ CREATE TABLE crime_charges (
     payment_due_date DATE,
     PRIMARY KEY(charge_id),
     FOREIGN KEY(crime_id) REFERENCES crimes(crime_id),
-    FOREIGN KEY(crime_code) REFERENCES crime_codes(crime_code),
+    FOREIGN KEY(crime_code) REFERENCES crime_codes(crime_code)
 );  
 
 -- create officers table
