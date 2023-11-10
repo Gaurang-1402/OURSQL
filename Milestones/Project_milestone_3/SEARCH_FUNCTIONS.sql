@@ -1,5 +1,7 @@
 -- CRIME SEARCH
 
+-- CURRENT ISSUE
+
 -- crime code description filter
 SELECT cri.crime_id, cri.classification, cri.status AS appeal_status, cco.code_description, cch.charge_status, off.first AS 'officer first name', off.last AS 'officer last name'
 	FROM crimes cri, crime_charges cch, crime_codes cco, crime_officers cof, officers off
@@ -197,4 +199,6 @@ SELECT first AS 'Probation Officer First Name', last AS 'Probation Officer Last 
 SELECT first AS 'Probation Officer First Name', last AS 'Probation Officer Last Name', status
 	FROM prob_officer
     WHERE status LIKE 'A'
+
+
 
