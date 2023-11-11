@@ -11,6 +11,8 @@ CREATE TABLE criminals (
     phone CHAR(10),
     v_status CHAR(1) DEFAULT 'N',
     p_status CHAR(1) DEFAULT 'N',
+    CONSTRAINT v_status_coding CHECK(v_status = 'Y' OR v_status = 'N'),
+    CONSTRAINT p_status_coding CHECK(p_status = 'Y' OR p_status = 'N'),
     PRIMARY KEY (criminal_id)
 );
 
@@ -34,6 +36,8 @@ CREATE TABLE crimes (
     hearing_date DATE,
     appeal_cut_date DATE,
     CONSTRAINT crime_date_chk CHECK (hearing_date > date_charged),
+    CONSTRAINT classification_coding CHECK (classification = 'F' OR classification = 'M' OR classification = 'O' OR classification = 'U'),
+    CONSTRAINT crime_status_coding CHECK (status = 'CL' OR status = 'CA' OR status = 'IA'),
     PRIMARY KEY (crime_id),
     FOREIGN KEY (criminal_id) REFERENCES criminals(criminal_id)
 );
@@ -51,6 +55,7 @@ CREATE TABLE prob_officer (
     phone CHAR(10),
     email VARCHAR (30),
     status CHAR(1) NOT NULL,
+    CONSTRAINT pof_status_coding CHECK (status = 'A' OR status = 'I'),
     PRIMARY KEY(prob_id)
 );
 
@@ -65,6 +70,7 @@ CREATE TABLE sentences (
     end_date DATE,
     violations NUMERIC(3) NOT NULL,
     CONSTRAINT sentence_date_chk CHECK (end_date > start_date),
+    CONSTRAINT sentence_type_coding CHECK (type = 'J' OR type = 'H' OR type = 'P'),
     PRIMARY KEY(sentence_id),
     FOREIGN KEY(criminal_id) REFERENCES criminals(criminal_id),
     FOREIGN KEY(prob_id) REFERENCES prob_officer(prob_id)
@@ -89,6 +95,7 @@ CREATE TABLE crime_charges (
     court_fee NUMERIC(7, 2),
     amount_paid NUMERIC(7, 2),
     payment_due_date DATE,
+    CONSTRAINT charge_status_coding CHECK(charge_status = 'PD' OR charge_status = 'GL' OR charge_status = 'NG'),
     PRIMARY KEY(charge_id),
     FOREIGN KEY(crime_id) REFERENCES crimes(crime_id),
     FOREIGN KEY(crime_code) REFERENCES crime_codes(crime_code)
@@ -104,6 +111,7 @@ CREATE TABLE officers (
     badge VARCHAR(14) UNIQUE,
     phone CHAR(10),
     status CHAR(1) DEFAULT 'A',
+    CONSTRAINT officer_status_coding CHECK(status = 'A' OR status = 'I'),
     PRIMARY KEY(officer_id)
 );
 
@@ -125,6 +133,7 @@ CREATE TABLE appeals (
     filing_date DATE,
     hearing_date DATE,
     status CHAR(1) DEFAULT 'P',
+    CONSTRAINT appeal_status_coding CHECK(status = 'P' OR status = 'A' OR status = 'D'),
     PRIMARY KEY (appeal_id),
     FOREIGN KEY(crime_id) REFERENCES crimes(crime_id)
 );  

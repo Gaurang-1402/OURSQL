@@ -99,7 +99,7 @@ VALUES
   (6, 'Miller', 'Lisa', 'P006', 'B0006', '8888888888', 'A'),
   (7, 'Wilson', 'David', 'P007', 'B0007', '6666666666', 'A'),
   (8, 'Taylor', 'Jessica', 'P008', 'B0008', '9999999999', 'I'),
-  (9, 'Anderson', 'Richard', 'P0009', 'B0009', '1111111111', 'A'),
+  (9, 'Anderson', 'Richard', 'P009', 'B0009', '1111111111', 'A'),
   (10, 'Brown', 'Megan', 'P010', 'B0010', '1234567890', 'A');
 
 INSERT INTO crime_officers (crime_id, officer_id)

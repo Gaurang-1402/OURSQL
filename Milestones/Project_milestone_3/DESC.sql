@@ -1,0 +1,10 @@
+DESC alias;
+DESC appeals;
+DESC crimes;
+DESC crime_charges;
+DESC crime_codes;
+DESC crime_officers;
+DESC criminals;
+DESC officers;
+DESC prob_officer;
+DESC sentences;
