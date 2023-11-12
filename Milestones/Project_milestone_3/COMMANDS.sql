@@ -451,7 +451,7 @@ ALTER TABLE `appeals`
 -- Constraints for table `crimes`
 --
 ALTER TABLE `crimes`
-  ADD CONSTRAINT `crimes_ibfk_1` FOREIGN KEY (`criminal_id`) REFERENCES `criminals` (`criminal_id`)
+  ADD CONSTRAINT `crimes_ibfk_1` FOREIGN KEY (`criminal_id`) REFERENCES `criminals` (`criminal_id`),
   ADD CONSTRAINT `classification_coding` CHECK (((`classification` = 'F') or (`classification` = 'M') or (`classification` = 'O') or (`classification` = 'U'))),
   ADD CONSTRAINT `crime_date_chk` CHECK ((`hearing_date` > `date_charged`)),
   ADD CONSTRAINT `crime_status_coding` CHECK (((`status` = 'CL') or (`status` = 'CA') or (`status` = 'IA')));
@@ -461,7 +461,7 @@ ALTER TABLE `crimes`
 --
 ALTER TABLE `crime_charges`
   ADD CONSTRAINT `crime_charges_ibfk_1` FOREIGN KEY (`crime_id`) REFERENCES `crimes` (`crime_id`),
-  ADD CONSTRAINT `crime_charges_ibfk_2` FOREIGN KEY (`crime_code`) REFERENCES `crime_codes` (`crime_code`)
+  ADD CONSTRAINT `crime_charges_ibfk_2` FOREIGN KEY (`crime_code`) REFERENCES `crime_codes` (`crime_code`),
   ADD CONSTRAINT `charge_status_coding` CHECK (((`charge_status` = 'PD') or (`charge_status` = 'GL') or (`charge_status` = 'NG')));
 
 --
@@ -682,7 +682,6 @@ SELECT officer_id, first AS 'officer first name', last AS 'officer last name', p
 SELECT officer_id, first AS 'officer first name', last AS 'officer last name', precinct, badge, status
 	FROM officers
     WHERE status LIKE 'A';
-
 
 
 -- PROB OFFICER SEARCH
