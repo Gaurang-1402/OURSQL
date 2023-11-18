@@ -684,7 +684,6 @@ SELECT officer_id, first AS 'officer first name', last AS 'officer last name', p
     WHERE status LIKE 'A';
 
 
-
 -- PROB OFFICER SEARCH
 -- prob officer first name filter(Begins with)
 SELECT first AS 'Probation Officer First Name', last AS 'Probation Officer Last Name', status
