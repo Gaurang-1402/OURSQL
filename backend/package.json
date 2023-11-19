@@ -1,7 +1,7 @@
 {
   "name": "panopticon-backend",
   "version": "1.0.0",
-  "description": "this is the backend for panopticon app",
+  "description": "backend for panopticon app",
   "main": "index.js",
   "type": "module",
   "scripts": {

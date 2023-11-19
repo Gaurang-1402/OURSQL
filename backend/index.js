@@ -16,6 +16,19 @@ const port = process.env.PORT || 5000;
 app.use(morgan('dev'));
 app.use(cors());
 
+import chalk from 'chalk';
+
+const coloredMorgan = morgan((tokens, req, res) => {
+    return [
+        chalk.hex('#ff4757').bold(tokens.method(req, res)),
+        chalk.hex('#1e90ff').bold(tokens.url(req, res)),
+        chalk.hex('#ff6b81').bold(tokens.status(req, res)),
+        chalk.hex('#34ace0').bold(tokens['response-time'](req, res) + ' ms')
+    ].join(' ');
+});
+
+app.use(coloredMorgan);
+
 express.json();
 express.urlencoded({ extended: true })
 
@@ -36,7 +49,7 @@ db.connect((err) => {
     if (err) {
         throw err;
     }
-    console.log('Connected to the MySQL server.');
+    console.log(chalk.yellow('Connected to the MySQL server.'));
 });
 
 // Define a simple route
@@ -48,5 +61,5 @@ app.get('/', (req, res) => {
 
 // Start server
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(chalk.blue(`Server running on port ${port}`));
 });
