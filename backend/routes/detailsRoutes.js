@@ -1,21 +1,14 @@
 import express from 'express';
+import { getCrimeDetails, getCriminalDetails, getOfficerDetails, getProbationOfficerDetails } from '../controllers/detailsControllers.js';
 
 const router = express.Router();
 
-router.get('/crime', (req, res) => {
-    res.send('Crime details');
-})
+router.get('/crime', getCrimeDetails);
 
-router.get('/criminal', (req, res) => {
-    res.send('Criminal details');
-})
+router.get('/criminal', getCriminalDetails);
 
-router.get('/officer', (req, res) => {
-    res.send('Officer details');
-})
+router.get('/officer', getOfficerDetails);
 
-router.get('/probation-officer', (req, res) => {
-    res.send('Probation Officer details');
-})
+router.get('/probation-officer', getProbationOfficerDetails)
 
 export default router;
