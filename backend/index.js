@@ -1,24 +1,35 @@
 import express from 'express';
 import mysql from 'mysql';
 import dotenv from 'dotenv';
+import morgan from 'morgan';
+import cors from 'cors';
+import searchRouter from './routes/searchRoutes.js';
+import detailsRouter from './routes/detailsRoutes.js';
 
 // Load environment variables from .env file
 dotenv.config();
 
 // Initialize Express
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 
+app.use(morgan('dev'));
+app.use(cors());
 
-console.log(process.env.DB_USERNAME);
+express.json();
+express.urlencoded({ extended: true })
 
 // Set up MySQL connection
 const db = mysql.createConnection({
-    host: process.env.DB_IP_ADDRESS, // Replace with your Google Cloud SQL host
-    user: process.env.DB_USERNAME,              // Replace with your database username
-    password: process.env.PASSWORD,          // Replace with your database password
-    database: process.env.DB_NAME           // Replace with your database name
+    host: process.env.DB_IP_ADDRESS,
+    user: process.env.DB_USERNAME,
+    password: process.env.PASSWORD,
+    database: process.env.DB_NAME
 });
+
+// 3) ROUTES
+app.use('/api/details', detailsRouter);
+app.use('/api/search', searchRouter);
 
 // Connect to MySQL
 db.connect((err) => {
@@ -32,6 +43,8 @@ db.connect((err) => {
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
+
+
 
 // Start server
 app.listen(port, () => {
