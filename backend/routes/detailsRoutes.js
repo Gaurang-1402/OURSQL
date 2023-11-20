@@ -1,14 +1,29 @@
 import express from 'express';
-import { getCrimeDetails, getCriminalDetails, getOfficerDetails, getProbationOfficerDetails } from '../controllers/detailsControllers.js';
+import { getCrimeByID, updateCrime, deleteCrime } from '../controllers/detailsControllers.js';
+import { getCriminalByID, updateCriminal, deleteCriminal } from '../controllers/detailsControllers.js';
+import { getOfficerByID, updateOfficer, deleteOfficer } from '../controllers/detailsControllers.js';
+import { getProbationOfficerByID, updateProbationOfficer, deleteProbationOfficer } from '../controllers/detailsControllers.js';
 
 const router = express.Router();
 
-router.get('/crime', getCrimeDetails);
+router.route('/crime/:id')
+    .get(getCrimeByID)
+    .put(updateCrime)
+    .delete(deleteCrime);
 
-router.get('/criminal', getCriminalDetails);
+router.route('/criminal/:id')
+    .get(getCriminalByID)
+    .put(updateCriminal)
+    .delete(deleteCriminal);
 
-router.get('/officer', getOfficerDetails);
+router.route('/officer/:id')
+    .get(getOfficerByID)
+    .put(updateOfficer)
+    .delete(deleteOfficer);
 
-router.get('/probation-officer', getProbationOfficerDetails)
-
+router.route('/probation-officer/:id')
+    .get(getProbationOfficerByID)
+    .put(updateProbationOfficer)
+    .delete(deleteProbationOfficer);
+    
 export default router;

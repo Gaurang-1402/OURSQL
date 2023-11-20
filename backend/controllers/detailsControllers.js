@@ -1,18 +1,78 @@
 import catchAsync from "../utils/catchAsync.js";
-import mysql from 'mysql';
+import db from '../config/db.js';
 
-export const getCrimeDetails = catchAsync(async (req, res, next) => {
-    res.send('Crime details');
+
+// Crime Controllers
+
+/*
+Depends on 
+Crime table
+Criminal table
+
+*/
+export const getCrimeByID = catchAsync(async (req, res, next) => {
+    res.send('Get Crime ByID');
+
 });
 
-export const getCriminalDetails = catchAsync(async (req, res, next) => {
-    res.send('Criminal details');
+export const updateCrime = catchAsync(async (req, res, next) => {
+    res.send('Update Crime ByID');
+    
 });
 
-export const getOfficerDetails = catchAsync(async (req, res, next) => {
-    res.send('Officer details');
+export const deleteCrime = catchAsync(async (req, res, next) => {
+    res.send('Delete Crime ByID');
 });
 
-export const getProbationOfficerDetails = catchAsync(async (req, res, next) => {
-    res.send('Probation Officer details');
+// Criminal Controllers
+
+/*
+Criminals
+Alias
+Sentences
+Probation Officer
+Crimes
+Crime Charges
+Crime_Codes
+*/
+export const getCriminalByID = catchAsync(async (req, res, next) => {
+    res.send('Criminal ByID');
+});
+
+export const updateCriminal = catchAsync(async (req, res, next) => {
+    res.send('Update Criminal ByID');
+});
+
+export const deleteCriminal = catchAsync(async (req, res, next) => {
+    res.send('Delete Criminal ByID');
+});
+
+
+// Officer Controllers
+
+export const getOfficerByID = catchAsync(async (req, res, next) => {
+    res.send('Officer ByID');
+});
+
+export const updateOfficer = catchAsync(async (req, res, next) => {
+    res.send('Update Officer ByID');
+});
+
+export const deleteOfficer = catchAsync(async (req, res, next) => {
+    res.send('Delete Officer ByID');
+});
+
+
+// Probation Officer Controllers
+
+export const getProbationOfficerByID = catchAsync(async (req, res, next) => {
+    res.send('Probation Officer ByID');
+});
+
+export const updateProbationOfficer = catchAsync(async (req, res, next) => {
+    res.send('Update Probation Officer ByID');
+});
+
+export const deleteProbationOfficer = catchAsync(async (req, res, next) => {
+    res.send('Delete Probation Officer ByID');
 });

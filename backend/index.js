@@ -32,25 +32,13 @@ app.use(coloredMorgan);
 express.json();
 express.urlencoded({ extended: true })
 
-// Set up MySQL connection
-const db = mysql.createConnection({
-    host: process.env.DB_IP_ADDRESS,
-    user: process.env.DB_USERNAME,
-    password: process.env.PASSWORD,
-    database: process.env.DB_NAME
-});
+
 
 // 3) ROUTES
 app.use('/api/details', detailsRouter);
 app.use('/api/search', searchRouter);
 
-// Connect to MySQL
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log(chalk.yellow('Connected to the MySQL server.'));
-});
+
 
 // Define a simple route
 app.get('/', (req, res) => {

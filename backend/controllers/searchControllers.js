@@ -1,5 +1,6 @@
 import catchAsync from "../utils/catchAsync.js";
 import mysql from 'mysql';
+import db from '../config/db.js';
 
 export const getCrimeSearchResults = catchAsync(async (req, res, next) => {
     res.send('Crime Search Results');
