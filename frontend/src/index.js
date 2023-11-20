@@ -22,7 +22,9 @@ import OfficerDetailPage from './pages/OfficerDetailPage';
 
 import ProbationOfficerSearchPage from './pages/ProbationOfficerSearchPage';
 import ProbationOfficerDetailPage from './pages/ProbationOfficerDetailPage';
+import { Provider } from 'react-redux';
 
+import store from './store'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
