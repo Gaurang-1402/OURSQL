@@ -7,23 +7,23 @@ import { getProbationOfficerByID, updateProbationOfficer, deleteProbationOfficer
 const router = express.Router();
 
 router.route('/crime/:id')
-    .get(getCrimeByID)
-    .put(updateCrime)
-    .delete(deleteCrime);
+    .get(protect, getCrimeByID)
+    .put(protect, updateCrime)
+    .delete(protect, deleteCrime);
 
 router.route('/criminal/:id')
-    .get(getCriminalByID)
-    .put(updateCriminal)
-    .delete(deleteCriminal);
+    .get(protect, getCriminalByID)
+    .put(protect, updateCriminal)
+    .delete(protect, deleteCriminal);
 
 router.route('/officer/:id')
-    .get(getOfficerByID)
-    .put(updateOfficer)
-    .delete(deleteOfficer);
+    .get(protect, getOfficerByID)
+    .put(protect, updateOfficer)
+    .delete(protect, deleteOfficer);
 
 router.route('/probation-officer/:id')
-    .get(getProbationOfficerByID)
-    .put(updateProbationOfficer)
-    .delete(deleteProbationOfficer);
+    .get(protect, getProbationOfficerByID)
+    .put(protect, updateProbationOfficer)
+    .delete(protect, deleteProbationOfficer);
     
 export default router;
