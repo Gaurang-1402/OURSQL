@@ -5,7 +5,7 @@ import db from '../config/db.js';
 const protect = catchAsync(async (req, res, next) => {
     let token;
     token = req.cookies.jwt;
-
+    console.log(token);
 
     if (!token) {
         res.status(401);

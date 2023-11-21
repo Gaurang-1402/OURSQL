@@ -3,6 +3,7 @@ import { getCrimeByID, updateCrime, deleteCrime } from '../controllers/detailsCo
 import { getCriminalByID, updateCriminal, deleteCriminal } from '../controllers/detailsControllers.js';
 import { getOfficerByID, updateOfficer, deleteOfficer } from '../controllers/detailsControllers.js';
 import { getProbationOfficerByID, updateProbationOfficer, deleteProbationOfficer } from '../controllers/detailsControllers.js';
+import { protect, admin } from '../utils/authMiddleware.js';
 
 const router = express.Router();
 

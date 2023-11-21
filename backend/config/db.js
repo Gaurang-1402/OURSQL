@@ -1,5 +1,6 @@
 import mysql from 'mysql2';
 import dotenv from 'dotenv';
+import colors from 'colors';
 
 dotenv.config();
 
@@ -14,10 +15,10 @@ const db = mysql.createPool({
 // Attempt to get a connection
 db.getConnection()
     .then(() => {
-        console.log(`Connected to the MySQL database, ${process.env.DB_NAME}.`);
+        console.log(`Connected to the MySQL database, ${process.env.DB_NAME}.`.yellow.bold);
     })
     .catch((error) => {
-        console.error("Error connecting to the MySQL database:", error);
+        console.error("Error connecting to the MySQL database:".red.bold, error);
         // Handle error appropriately (e.g., retry connection, exit process, etc.)
     });
 

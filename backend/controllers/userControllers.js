@@ -10,7 +10,7 @@ const checkPassword = async (enteredPassword, userPassword) => {
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 // @access  Public
-const authUser = catchAsync(async (req, res) => {
+const loginUser = catchAsync(async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
         res.status(400).send('Email and password are required');
@@ -77,4 +77,4 @@ const getUserById = catchAsync(async (req, res) => {
     res.send('get user by id')
 })
 
-export { authUser, registerUser, logoutUser, getUserProfile, getUserById }
+export { loginUser, registerUser, logoutUser, getUserProfile, getUserById }
