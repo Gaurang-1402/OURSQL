@@ -1,5 +1,4 @@
 import express from 'express';
-import mysql from 'mysql';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
