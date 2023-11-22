@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import morgan from 'morgan';
 import cors from 'cors';
 import searchRouter from './routes/searchRoutes.js';
-import detailsRouter from './routes/detailsRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
 import colors from 'colors';
@@ -25,7 +24,6 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // 3) ROUTES
-app.use('/api/details', detailsRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/users', userRouter);
 
