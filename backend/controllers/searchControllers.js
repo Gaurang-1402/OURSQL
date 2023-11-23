@@ -1,5 +1,4 @@
 import catchAsync from "../utils/catchAsync.js";
-import mysql from 'mysql2';
 import db from '../config/db.js';
 
 export const getCrimeSearchResults = catchAsync(async (req, res, next) => {

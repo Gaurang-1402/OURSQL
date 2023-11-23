@@ -3,17 +3,14 @@ import { getCrimeSearchResults,
     getCriminalSearchResults, 
     getOfficerSearchResults, 
     getProbationOfficerSearchResults } from '../controllers/searchControllers.js';
-
+import { protect, admin } from '../utils/authMiddleware.js';
     
 const router = express.Router();
 
-router.get('/crime', getCrimeSearchResults);
-    
-router.get('/criminal', getCriminalSearchResults);
-
-router.get('/officer', getOfficerSearchResults);
-
-router.get('/probation-officer', getProbationOfficerSearchResults);
+router.route('/crime').get(protect, getCrimeSearchResults);
+router.route('/criminal').get(protect, getCriminalSearchResults);
+router.route('/officer').get(protect, getOfficerSearchResults);
+router.route('/probation-officer').get(protect, getProbationOfficerSearchResults);
 
 
 export default router;
