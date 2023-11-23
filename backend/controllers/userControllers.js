@@ -41,6 +41,7 @@ const loginUser = catchAsync(async (req, res) => {
             message: 'Invalid email or password',
         
         });
+        throw new Error('Invalid email or password');
     }
 });
 

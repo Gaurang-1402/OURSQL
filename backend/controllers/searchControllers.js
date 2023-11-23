@@ -16,3 +16,9 @@ export const getOfficerSearchResults = catchAsync(async (req, res, next) => {
 export const getProbationOfficerSearchResults = catchAsync(async (req, res, next) => {
     res.send('Probation Officer Search Results');
 });
+
+
+export const getAppealSearchResults = catchAsync(async (req, res, next) => {
+    const { startHearingDate, startFilingDate, selectedStatus } = req.body;
+    res.send("Appeal Search Results");
+})
