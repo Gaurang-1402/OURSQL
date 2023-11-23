@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Navbar, Nav, Container, NavDropdown, Button } from 'react-bootstrap'
+import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import { FaUser } from 'react-icons/fa'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useLogoutMutation } from '../slices/usersApiSlice'

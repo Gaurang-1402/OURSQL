@@ -1,17 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const CrimeSearchPage = () => {
+const CrimeChargeSearchPage = () => {
   return (
-    <div>CrimeSearchPage
-      <Link to="/login?redirect=/crime">
+    <div>CrimeChargeSearchPage
+
+      <Link to="/login?redirect=/crime-charge">
         <button >
           Add/Update Crime Charges
         </button>
       </Link>
-
     </div>
   )
 }
 
-export default CrimeSearchPage
+export default CrimeChargeSearchPage

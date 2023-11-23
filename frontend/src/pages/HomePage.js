@@ -5,23 +5,38 @@ const HomePage = () => {
   return (
     <div>
       <Link to='/login?redirect=/crime/search'>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button >
           Search Crimes
         </button>
       </Link>
       <Link to="/login?redirect=/criminal/search">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button >
           Search Criminals
         </button>
       </Link>
       <Link to="/login?redirect=/officer/search">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button >
           Search Officers
         </button>
       </Link>
       <Link to="/login?redirect=/probation-officer/search">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        <button >
           Search Probation Officers
+        </button>
+      </Link>
+      <Link to="/login?redirect=/sentence/search">
+        <button >
+          Search Sentences
+        </button>
+      </Link>
+      <Link to="/login?redirect=/appeal/search">
+        <button >
+          Search Appeals
+        </button>
+      </Link>
+      <Link to="/login?redirect=/crime-charge/search">
+        <button >
+          Search Crime Charges
         </button>
       </Link>
     </div>
