@@ -1,23 +1,43 @@
 import React, { useState } from 'react';
-import { Table, Form, Button, Row, Col, Dropdown } from 'react-bootstrap';
+import { Table, Form, Button, Row, Col, Dropdown, Modal } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import { Link } from 'react-router-dom'
-import { FaEdit, FaTrash } from 'react-icons/fa'
+import { FaEdit } from 'react-icons/fa'
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { BASE_URL } from '../constants';
+import { useSelector } from 'react-redux';
+import DeleteModal from '../components/DeleteModal';
+
 
 const AppealSearchPage = () => {
+  const { userInfo } = useSelector((state) => state.auth);
+
+
+
   const [statusOptions, setStatusOptions] = useState([
-    { id: 0, label: 'Select Option' },
-    { id: 1, label: 'P (Pending)' },
-    { id: 2, label: 'A (Approved)' },
-    { id: 3, label: 'D (Disapproved)' }
+    { id: 0, label: 'Select Option', value: '' },
+    { id: 1, label: 'P (Pending)', value: 'P' },
+    { id: 2, label: 'A (Approved)', value: 'A' },
+    { id: 3, label: 'D (Disapproved)', value: 'D' },
   ]);
 
-  const [startHearingDate, setHearingStartDate] = useState('');
-  const [startFilingDate, setFilingStartDate] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('');
+  const [startHearingDate, setHearingStartDate] = useState(new Date('2022-04-25'));
+  const [startFilingDate, setFilingStartDate] = useState(new Date('2022-04-25'));
+  const [selectedStatus, setSelectedStatus] = useState({});
+
+  const [appeals, setAppeals] = useState([]); // [{}]
+
+
+  const handleDeleteSuccess = (deletedId) => {
+    setAppeals(appeals.filter(appeal => appeal.appeal_id !== deletedId));
+    toast.success('Appeal deleted');
+    };
+
+  const handleDeleteError = (error) => {
+    toast.error('Delete error:', error);
+    // Handle deletion error (e.g., show error message to user)
+  };
 
 
   const handleSubmit = async (event) => {
@@ -25,15 +45,15 @@ const AppealSearchPage = () => {
     console.log('Form submitted');
     try {
 
-      const response = await axios.get(BASE_URL+'/api/search/appeal', {
-        body: {
-          startHearingDate: startHearingDate,
-          startFilingDate: startFilingDate,
-          selectedStatus: selectedStatus
-        },
-        withCredentials: true 
+      const response = await axios.post(BASE_URL + '/api/search/appeal', {
+        startHearingDate: startHearingDate,
+        startFilingDate: startFilingDate,
+        selectedStatus: selectedStatus.value
+      }, {
+        withCredentials: true
       });
-      console.log(response);
+      toast.success('Appeal search successful');
+      setAppeals(response.data.data.results);
 
     } catch (error) {
       toast.error(error.data.message);
@@ -71,12 +91,12 @@ const AppealSearchPage = () => {
 
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
 
-                    {selectedStatus || "Select Option"}
+                    {selectedStatus.label || "Select Option"}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
                     {statusOptions.map(option => (
-                      <Dropdown.Item key={option.id} onClick={() => setSelectedStatus(option.label)}>
+                      <Dropdown.Item key={option.id} onClick={() => setSelectedStatus(option)}>
                         {option.label}
                       </Dropdown.Item>
                     ))}
@@ -84,9 +104,13 @@ const AppealSearchPage = () => {
                 </Dropdown>
               </Form.Group>
               <Button disabled={!selectedStatus || !startHearingDate || !startFilingDate} type="submit" className="m-5" variant="primary">Filter</Button>
-              <Link variant="secondary" to="/login?redirect=/appeal">
-                <Button variant="secondary">Add new Appeal</Button>
-              </Link>
+              {
+                userInfo && userInfo.isAdmin && (
+                  <Link variant="secondary" to="/login?redirect=/appeal">
+                    <Button variant="secondary">Add new Appeal</Button>
+                  </Link>
+                )
+              }
             </Form>
           </Col>
           <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
@@ -96,74 +120,51 @@ const AppealSearchPage = () => {
         </Row>
       </div>
 
-      <Table striped hover responsive className='table-sm'>
-        <thead>
-          <tr>
-            <th>CRIME_ID</th>
-            <th>STATUS</th>
-            <th>FILING DATE</th>
-            <th>HEARING DATE</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>P</td>
-            <td>2020-01-01</td>
-            <td>2020-01-01</td>
-            <td>
-            <Link className='m-2' to={`/appeal/3/edit`}>
-                <Button variant='light' className='btn-sm'>
-                  <FaEdit />
-                </Button>
-              </Link>
-              <Link to={`/appeal/3/edit`}>
-                <Button variant='light' className='btn-sm'>
-                  <FaTrash />
-                </Button>
-              </Link>
-            </td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>A</td>
-            <td>2020-01-01</td>
-            <td>2020-01-01</td>
-            <td>
-            <Link className='m-2' to={`/appeal/3/edit`}>
-                <Button variant='light' className='btn-sm'>
-                  <FaEdit />
-                </Button>
-              </Link>
-              <Link to={`/appeal/3/edit`}>
-                <Button variant='light' className='btn-sm'>
-                  <FaTrash />
-                </Button>
-              </Link>
-            </td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>D</td>
-            <td>2020-01-01</td>
-            <td>2020-01-01</td>
-            <td>
-              <Link className='m-2' to={`/appeal/3/edit`}>
-                <Button variant='light' className='btn-sm'>
-                  <FaEdit />
-                </Button>
-              </Link>
-              <Link to={`/appeal/3/edit`}>
-                <Button variant='light' className='btn-sm'>
-                  <FaTrash />
-                </Button>
-              </Link>
-            </td>
-          </tr>
+      {
+        appeals.length > 0 && (
 
-        </tbody>
-      </Table>
+          <Table striped hover responsive className='table-sm'>
+
+            <thead>
+              <tr>
+                <th>CRIME_ID</th>
+                <th>STATUS</th>
+                <th>FILING DATE</th>
+                <th>HEARING DATE</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                appeals.map((appeal) => (
+                  <tr key={appeal.appeal_id}>
+                    <td>{appeal.crime_id}</td>
+                    <td>{appeal.status}</td>
+                    <td>{appeal.filing_date}</td>
+                    <td>{appeal.hearing_date}</td>
+
+                    {
+                      userInfo && userInfo.isAdmin && (
+                        <td>
+                          <Link to="/login?redirect=/appeal">
+                            <Button variant='light' className='btn-sm'>
+                              <FaEdit />
+                            </Button>
+                          </Link>
+                          <DeleteModal id={appeal.appeal_id} entity={"appeal"} onDeleteSuccess={handleDeleteSuccess}
+                            onDeleteError={handleDeleteError}
+                          />
+                        </td>
+                      )
+                    }
+
+                  </tr>
+                ))
+              }
+            </tbody>
+          </Table>)
+      }
+
 
     </>
   );

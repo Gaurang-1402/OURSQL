@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import searchRouter from './routes/searchRoutes.js';
 import userRouter from './routes/userRoutes.js';
+import deleteRouter from './routes/deleteRoutes.js';
 import cookieParser from 'cookie-parser';
 import colors from 'colors';
 
@@ -32,6 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 // 3) ROUTES
 app.use('/api/search', searchRouter);
 app.use('/api/users', userRouter);
+app.use('/api', deleteRouter);
 
 
 
@@ -39,7 +41,6 @@ app.use('/api/users', userRouter);
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
-
 
 
 // Start server

@@ -2,16 +2,17 @@ import express from 'express';
 import { getCrimeSearchResults, 
     getCriminalSearchResults, 
     getOfficerSearchResults, 
-    getProbationOfficerSearchResults, getAppealSearchResults } from '../controllers/searchControllers.js';
+    getProbationOfficerSearchResults, getAppealSearchResults, getSentenceSearchResults, getCrimeChargeSearchResults } from '../controllers/searchControllers.js';
 import { protect, admin } from '../utils/authMiddleware.js';
     
 const router = express.Router();
 
-router.route('/crime').get(protect, getCrimeSearchResults);
-router.route('/criminal').get(protect, getCriminalSearchResults);
-router.route('/officer').get(protect, getOfficerSearchResults);
-router.route('/probation-officer').get(protect, getProbationOfficerSearchResults);
-router.route('/appeal').get(protect, getAppealSearchResults);
-
+router.route('/crime').post(protect, getCrimeSearchResults);
+router.route('/criminal').post(protect, getCriminalSearchResults);
+router.route('/officer').post(protect, getOfficerSearchResults);
+router.route('/probation-officer').post(protect, getProbationOfficerSearchResults);
+router.route('/appeal').post(protect, getAppealSearchResults);
+router.route('/sentence').post(protect, getSentenceSearchResults);
+router.route('/crime-charge').post(protect, getCrimeChargeSearchResults);
 
 export default router;
