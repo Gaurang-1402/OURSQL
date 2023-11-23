@@ -4,3 +4,5 @@ export const LOGIN_URL = `/login`
 export const SEARCH_URL = `/api/search`
 export const DETAIL_URL = `/api/details`
 export const USERS_API_URL = `/api/users`
+
+

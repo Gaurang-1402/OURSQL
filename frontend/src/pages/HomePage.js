@@ -1,43 +1,44 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 const HomePage = () => {
   return (
     <div>
       <Link to='/login?redirect=/crime/search'>
-        <button >
+        <Button variant="secondary" >
           Search Crimes
-        </button>
+        </Button>
       </Link>
       <Link to="/login?redirect=/criminal/search">
-        <button >
+        <Button variant="secondary" >
           Search Criminals
-        </button>
+        </Button>
       </Link>
       <Link to="/login?redirect=/officer/search">
-        <button >
+        <Button variant="secondary" >
           Search Officers
-        </button>
+        </Button>
       </Link>
       <Link to="/login?redirect=/probation-officer/search">
-        <button >
+        <Button variant="secondary" >
           Search Probation Officers
-        </button>
+        </Button>
       </Link>
       <Link to="/login?redirect=/sentence/search">
-        <button >
+        <Button variant="secondary" >
           Search Sentences
-        </button>
+        </Button>
       </Link>
       <Link to="/login?redirect=/appeal/search">
-        <button >
+        <Button variant="secondary" >
           Search Appeals
-        </button>
+        </Button>
       </Link>
       <Link to="/login?redirect=/crime-charge/search">
-        <button >
+        <Button variant="secondary" >
           Search Crime Charges
-        </button>
+        </Button>
       </Link>
     </div>
   )
