@@ -14,7 +14,9 @@ const checkPassword = async (enteredPassword, userPassword) => {
 const loginUser = catchAsync(async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
-        res.status(400).send('Email and password are required');
+        res.status(400).json({
+            message: 'Email and password are required',
+        });
         return;
     }
     const query = `SELECT * FROM USERS WHERE email = '${email}'`;
@@ -30,11 +32,15 @@ const loginUser = catchAsync(async (req, res) => {
         res.json({
             _id: user.user_id,
             email: user.email,
+            name: user.name,
             isAdmin: user.is_admin === 'Y' // Convert 'Y'/'N' to boolean, if needed
         });
 
     } else {
-        res.status(401).send('Invalid email or password');
+        res.status(401).json({
+            message: 'Invalid email or password',
+        
+        });
     }
 });
 
@@ -45,13 +51,17 @@ const registerUser = catchAsync(async (req, res) => {
     const { name, email, password, isAdmin } = req.body;
 
     if (!name || !email || !password) {
-        res.status(400).send('Name, email, and password are required');
+        res.status(400).json({
+            message: 'Name, email, and password are required',
+        });
         return;
     }
 
     const userExists = await db.query(`SELECT * FROM USERS WHERE email = '${email}'`);
     if (userExists[0].length > 0) {
-        res.status(400).send('User already exists');
+        res.status(400).json({
+            message: 'User already exists',
+        });        
         return;
     }
 
@@ -74,7 +84,9 @@ const registerUser = catchAsync(async (req, res) => {
     }
     catch (error) {
         console.error(error);
-        res.status(400).send('Invalid user data');
+        res.status(400).json({
+            message: 'Invalid user data',
+        });
     }
 })
 
@@ -109,12 +121,16 @@ const getUserProfile = catchAsync(async (req, res) => {
                 isAdmin: user.is_admin === 'Y',
             });
         } else {
-            res.status(404).send('User not found');
+            res.status(404).json({
+                message: 'User not found',
+            });
         }
 
     } catch (error) {
         console.error(error);
-        res.status(500).send('Server error');
+        res.status(500).json({
+            message: 'Server error',
+        });
     }
 }
 

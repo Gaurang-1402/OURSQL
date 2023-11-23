@@ -11,6 +11,8 @@ import {
   RouterProvider
 } from 'react-router-dom'
 
+import PrivateRoute from './components/PrivateRoute';
+
 import HomePage from './pages/HomePage';
 import CrimeSearchPage from './pages/CrimeSearchPage';
 
@@ -22,27 +24,42 @@ import ProbationOfficerSearchPage from './pages/ProbationOfficerSearchPage';
 import { Provider } from 'react-redux';
 
 import store from './store'
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import AdminRoute from './components/AdminRoute';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path='/' element={<HomePage />} />
-      <Route path="/crime/search" element={<CrimeSearchPage />}/>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
-      <Route path="/criminal/search" element={<CriminalSearchPage />}/>
 
-      <Route path="/officer/search" element={<OfficerSearchPage />}/>
+      <Route path='' element={<PrivateRoute />} >
+        <Route path="/crime/search" element={<CrimeSearchPage />} />
 
-      <Route path="/probation-officer/search" element={<ProbationOfficerSearchPage />}/>
+        <Route path="/criminal/search" element={<CriminalSearchPage />} />
+
+        <Route path="/officer/search" element={<OfficerSearchPage />} />
+
+        <Route path="/probation-officer/search" element={<ProbationOfficerSearchPage />} />
 
       </Route>
+      
+      <Route path='' element={<AdminRoute />} >
+
+      </Route>
+    </Route >
   )
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 
