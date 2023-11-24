@@ -98,8 +98,7 @@ const AppealSearchPage = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               </Form.Group>
-              <Button disabled={!selectedStatus || !startHearingDate || !startFilingDate} type="submit" className="m-5" variant="primary">Filter</Button>
-              {
+              <Button disabled={Object.keys(selectedStatus).length === 0 || !startHearingDate || !startFilingDate} type="submit" className="m-5" variant="primary">Filter</Button>              {
                 userInfo && userInfo.isAdmin && (
                   <Link variant="secondary" to="/login?redirect=/appeal">
                     <Button variant="secondary">Add new Appeal</Button>
@@ -141,7 +140,7 @@ const AppealSearchPage = () => {
                     {
                       userInfo && userInfo.isAdmin && (
                         <td>
-                          <Link to="/login?redirect=/appeal">
+                          <Link to={`/appeal/${appeal.appeal_id}`}>
                             <Button variant='light' className='btn-sm'>
                               <FaEdit />
                             </Button>
@@ -159,8 +158,6 @@ const AppealSearchPage = () => {
             </tbody>
           </Table>)
       }
-
-
     </>
   );
 }

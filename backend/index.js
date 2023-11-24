@@ -6,6 +6,7 @@ import searchRouter from './routes/searchRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import deleteRouter from './routes/deleteRoutes.js';
 import createRouter from './routes/createRoutes.js';
+import updateRouter from './routes/updateRoutes.js';
 import cookieParser from 'cookie-parser';
 import colors from 'colors';
 
@@ -36,6 +37,7 @@ app.use('/api/search', searchRouter);
 app.use('/api/users', userRouter);
 app.use('/api', deleteRouter);
 app.use('/api', createRouter);
+app.use('/api', updateRouter);
 
 
 

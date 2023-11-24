@@ -5,7 +5,7 @@ export const createCrime = catchAsync(async (req, res, next) => {
     res.send('Crime create');
 });
 
-export const getCrime = catchAsync(async (req, res, next) => {
+export const getCrimeIDs = catchAsync(async (req, res, next) => {
     // return all crime IDs
     const query = 'SELECT * FROM crimes';
     try {
@@ -59,6 +59,32 @@ export const createAppeal = catchAsync(async (req, res, next) => {
         console.log(err);
     }
 })
+
+
+export const getAppeal = catchAsync(async (req, res, next) => {
+
+    const appealId = req.params.id;
+    const query = `SELECT * FROM appeals WHERE appeal_id = ${appealId}`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            status: 'success',
+            data: {
+                data: result[0]
+            }
+        });
+    }
+    catch (err) {
+        console.log(err);
+
+        res.status(500).json({
+            message: 'Invalid ID provided',
+        });
+    }
+}
+);
+
+
 
 export const createSentence = catchAsync(async (req, res, next) => {
     res.send('Sentence create');

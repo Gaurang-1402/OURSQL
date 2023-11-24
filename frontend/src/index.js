@@ -74,6 +74,8 @@ const router = createBrowserRouter(
         <Route path="/probation-officer" element={<ProbationOfficerPage />} />
 
         <Route path="/appeal" element={<AppealPage />} />
+        <Route path="/appeal/:id" element={<AppealPage />} />
+
         <Route path="/crime-charge" element={<CrimeChargePage />} />
         <Route path="/sentence" element={<SentencePage />} />
 
