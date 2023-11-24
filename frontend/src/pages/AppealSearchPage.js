@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Table, Form, Button, Row, Col, Dropdown, Modal } from 'react-bootstrap';
+import { Table, Form, Button, Row, Col, Dropdown } from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 import { Link } from 'react-router-dom'
 import { FaEdit } from 'react-icons/fa'
@@ -13,9 +13,7 @@ import DeleteModal from '../components/DeleteModal';
 const AppealSearchPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
-
-
-  const [statusOptions, setStatusOptions] = useState([
+  const [statusOptions,] = useState([
     { id: 0, label: 'Select Option', value: '' },
     { id: 1, label: 'P (Pending)', value: 'P' },
     { id: 2, label: 'A (Approved)', value: 'A' },
@@ -28,21 +26,18 @@ const AppealSearchPage = () => {
 
   const [appeals, setAppeals] = useState([]); // [{}]
 
-
   const handleDeleteSuccess = (deletedId) => {
     setAppeals(appeals.filter(appeal => appeal.appeal_id !== deletedId));
     toast.success('Appeal deleted');
-    };
+  };
 
   const handleDeleteError = (error) => {
     toast.error('Delete error:', error);
-    // Handle deletion error (e.g., show error message to user)
   };
 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Form submitted');
     try {
 
       const response = await axios.post(BASE_URL + '/api/search/appeal', {

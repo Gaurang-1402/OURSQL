@@ -9,7 +9,7 @@ const DeleteModal = ({ id, onDeleteSuccess, entity, onDeleteError }) => {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`${BASE_URL}/api/${entity}/${id}`, { withCredentials: true }); setShowModal(false);
+      await axios.delete(`${BASE_URL}/api/${entity}/${id}`, { withCredentials: true }); setShowModal(false);
       if (onDeleteSuccess) {
         onDeleteSuccess(id);
       }
