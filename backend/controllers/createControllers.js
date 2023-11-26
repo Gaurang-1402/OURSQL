@@ -6,7 +6,6 @@ export const createCrime = catchAsync(async (req, res, next) => {
 });
 
 export const getCrimeIDs = catchAsync(async (req, res, next) => {
-    // return all crime IDs
     const query = 'SELECT * FROM crimes';
     try {
         const result = await db.query(query);
@@ -89,7 +88,7 @@ export const getCriminalIDs = catchAsync(async (req, res, next) => {
                 })
             }
         });
-    } catch(err) {
+    } catch (err) {
         console.log(err);
     }
 });
@@ -133,6 +132,28 @@ export const getOfficer = catchAsync(async (req, res, next) => {
         });
     }
 })
+
+export const getCrimeCodeIDs = catchAsync(async (req, res, next) => {
+    // return all crime code IDs
+    const query = 'SELECT * FROM crime_codes';
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            status: 'success',
+            data: {
+                data: result[0].map((crimeCode) => {
+                    return {
+                        id: crimeCode.crime_code,
+                        label: crimeCode.crime_code,
+                        value: crimeCode.crime_code
+                    }
+                })
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
+});
 
 export const createProbationOfficer = catchAsync(async (req, res, next) => {
     res.send('Probation Officer create');
@@ -211,6 +232,49 @@ export const createCriminal = catchAsync(async (req, res, next) => {
     res.send('Criminal create');
 })
 
+
 export const createCrimeCharge = catchAsync(async (req, res, next) => {
-    res.send('Crime Charge create');
+    const { crime_id, crime_code, charge_status, fine_amount, court_fee, amount_paid, payment_due_date } = req.body;
+    const newId = Math.floor(Math.random() * 1000000000);
+
+    const fineAmountFloat = parseFloat(fine_amount).toFixed(2);
+    const courtFeeFloat = parseFloat(court_fee).toFixed(2);
+    const amountPaidFloat = parseFloat(amount_paid).toFixed(2);
+    
+    console.log(newId, crime_id, crime_code, charge_status, fineAmountFloat, courtFeeFloat, amountPaidFloat, payment_due_date);
+
+    let query = `INSERT INTO crime_charges (charge_id, crime_id, crime_code, charge_status, fine_amount, court_fee, amount_paid, payment_due_date) VALUES (${newId}, ${crime_id}, ${crime_code}, '${charge_status}', ${fineAmountFloat}, ${courtFeeFloat}, ${amountPaidFloat}, '${payment_due_date}')`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            message: 'Created crime charge successfully',
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Invalid data',
+        });
+        console.log(err);
+    }
+})
+
+export const getCrimeCharge = catchAsync(async (req, res, next) => {
+    const chargeId = req.params.id;
+    const query = `SELECT * FROM crime_charges WHERE charge_id = ${chargeId}`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            status: 'success',
+            data: {
+                data: result[0]
+            }
+        });
+    }
+    catch (err) {
+        console.log(err);
+
+        res.status(500).json({
+            message: 'Invalid ID provided',
+        });
+    }
 })

@@ -51,17 +51,12 @@ const router = createBrowserRouter(
 
       <Route path='' element={<PrivateRoute />} >
         <Route path="/crime/search" element={<CrimeSearchPage />} />
-
         <Route path="/criminal/search" element={<CriminalSearchPage />} />
-
         <Route path="/officer/search" element={<OfficerSearchPage />} />
-
         <Route path="/probation-officer/search" element={<ProbationOfficerSearchPage />} />
-
         <Route path="/appeal/search" element={<AppealSearchPage />} />
         <Route path="/crime-charge/search" element={<CrimeChargeSearchPage />} />
         <Route path="/sentence/search" element={<SentenceSearchPage />} />
-
       </Route>
 
       <Route path='' element={<AdminRoute />} >
@@ -70,7 +65,6 @@ const router = createBrowserRouter(
 
         <Route path="/criminal" element={<CriminalPage />} />
         <Route path="/criminal/:id" element={<CriminalPage />} />
-
 
         <Route path="/officer" element={<OfficerPage />} />
         <Route path="/officer/:id" element={<OfficerPage />} />
@@ -82,7 +76,7 @@ const router = createBrowserRouter(
         <Route path="/appeal/:id" element={<AppealPage />} />
 
         <Route path="/crime-charge" element={<CrimeChargePage />} />
-        <Route path="/crime-charge/Lid" element={<CrimeChargePage />} />
+        <Route path="/crime-charge/:id" element={<CrimeChargePage />} />
 
         <Route path="/sentence" element={<SentencePage />} />
         <Route path="/sentence/:id" element={<SentencePage />} />

@@ -103,5 +103,22 @@ export const updateSentence = catchAsync(async (req, res, next) => {
 })
 
 export const updateCrimeCharge = catchAsync(async (req, res, next) => {
-    res.send('Crime Charge update');
+    const { crime_id, crime_code, charge_status, payment_due_date } = req.body;
+    const chargeId = req.params.id;
+
+    console.log(crime_id, crime_code, charge_status, payment_due_date, chargeId)
+
+    const query = `UPDATE crime_charges SET crime_id = ${crime_id}, crime_code = '${crime_code}', charge_status = '${charge_status}', payment_due_date = '${payment_due_date}' WHERE charge_id = ${chargeId}`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            message: 'Updated crime charge successfully',
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Invalid data',
+        });
+        console.log(err);
+    }
 })

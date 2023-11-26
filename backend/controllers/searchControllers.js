@@ -97,13 +97,6 @@ export const getAppealSearchResults = catchAsync(async (req, res, next) => {
     }
 })
 
-// {
-//     "type": "P",
-//     "start_date": "2022-04-01",
-//     "end_date": "2023-01-01",
-//     "violations": 2
-//   }
-
   
 export const getSentenceSearchResults = catchAsync(async (req, res, next) => {
     const { type, start_date, end_date, violations } = req.body;
@@ -146,6 +139,51 @@ export const getSentenceSearchResults = catchAsync(async (req, res, next) => {
     res.send('Sentence Search Results');
 })
 
+// {
+//     crime_id: selectedCrimeID.crimeID,
+//     crime_code: crimeCode,
+//     charge_status: chargeStatus,
+//     payment_due_date: paymentDueDate ? paymentDueDate.toISOString().split('T')[0] : null
+//   }
+
 export const getCrimeChargeSearchResults = catchAsync(async (req, res, next) => {
-    res.send('Crime Charge Search Results');
+    const { crime_id, crime_code, charge_status, payment_due_date } = req.body;
+
+    console.log(crime_id, crime_code, charge_status, payment_due_date);
+    let query = 'SELECT * FROM crime_charges WHERE 1=1';
+
+    if (crime_id) {
+        query += ` AND crime_id = '${crime_id}'`;
+    }
+
+    if (crime_code) {
+        query += ` AND crime_code = '${crime_code}'`;
+    }
+
+    if (charge_status) {
+        query += ` AND charge_status = '${charge_status}'`;
+    }
+
+    if (payment_due_date) {
+        query += ` AND payment_due_date = '${payment_due_date}'`;
+    }
+
+    try {
+        const results = await db.query(query);
+
+        res.status(200).json({
+            data: {
+                results: results[0]
+            }
+        })
+
+    } catch (error) {
+            
+            console.log(error)
+            res.status(500).json({
+                message: 'Something went wrong'
+            })
+        }
+
+
 })

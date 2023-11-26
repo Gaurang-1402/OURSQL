@@ -21,4 +21,5 @@ router.route('/appeal/:id').put(protect, admin, updateAppeal);
 router.route('/sentence/:id').put(protect, admin, updateSentence);
 router.route('/crime-charge/:id').put(protect, admin, updateCrimeCharge);
 
+
 export default router;

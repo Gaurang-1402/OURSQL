@@ -10,7 +10,9 @@ import {
     getOfficer,
     getProbationOfficerIDs,
     getCriminalIDs,
-    getSentence
+    getSentence,
+    getCrimeCodeIDs,
+    getCrimeCharge
 } from '../controllers/createControllers.js';
 import { protect, admin } from '../utils/authMiddleware.js';
 
@@ -21,7 +23,6 @@ router.route('/crime').get(protect, admin, getCrimeIDs);
 
 router.route('/criminal').post(protect, admin, createCriminal);
 router.route('/criminal').get(protect, admin, getCriminalIDs);
-
 
 router.route('/officer').post(protect, admin, createOfficer);
 router.route('/officer/:id').get(protect, admin, getOfficer);
@@ -36,5 +37,8 @@ router.route('/sentence').post(protect, admin, createSentence);
 router.route('/sentence/:id').get(protect, admin, getSentence);
 
 router.route('/crime-charge').post(protect, admin, createCrimeCharge);
+router.route('/crime-charge/:id').get(protect, admin, getCrimeCharge);
+
+router.route('/crime-code').get(protect, admin, getCrimeCodeIDs);
 
 export default router;
