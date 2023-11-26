@@ -97,7 +97,52 @@ export const getAppealSearchResults = catchAsync(async (req, res, next) => {
     }
 })
 
+// {
+//     "type": "P",
+//     "start_date": "2022-04-01",
+//     "end_date": "2023-01-01",
+//     "violations": 2
+//   }
+
+  
 export const getSentenceSearchResults = catchAsync(async (req, res, next) => {
+    const { type, start_date, end_date, violations } = req.body;
+
+    console.log(type, start_date, end_date, violations);
+    let query = 'SELECT * FROM sentences WHERE 1=1';
+
+    if (type) {
+        query += ` AND type = '${type}'`;
+    }
+
+    if (start_date) {
+        query += ` AND start_date >= '${start_date}'`;
+    }
+
+    if (end_date) {
+        query += ` AND end_date <= '${end_date}'`;
+    }
+
+    if (violations) {
+        query += ` AND violations = '${violations}'`;
+    }
+
+    try {
+        const results = await db.query(query);
+
+        res.status(200).json({
+            data: {
+                results: results[0]
+            }
+        })
+
+    } catch (error) {
+
+        console.log(error)
+        res.status(500).json({
+            message: 'Something went wrong'
+        })
+    }
     res.send('Sentence Search Results');
 })
 

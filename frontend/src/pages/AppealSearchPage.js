@@ -125,7 +125,7 @@ const AppealSearchPage = () => {
                 <th>STATUS</th>
                 <th>FILING DATE</th>
                 <th>HEARING DATE</th>
-                <th></th>
+                <th>ACTIONS</th>
               </tr>
             </thead>
             <tbody>
