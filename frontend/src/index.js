@@ -66,18 +66,26 @@ const router = createBrowserRouter(
 
       <Route path='' element={<AdminRoute />} >
         <Route path="/crime" element={<CrimePage />} />
+        <Route path="/crime/:id" element={<CrimePage />} />
 
         <Route path="/criminal" element={<CriminalPage />} />
+        <Route path="/criminal/:id" element={<CriminalPage />} />
+
 
         <Route path="/officer" element={<OfficerPage />} />
+        <Route path="/officer/:id" element={<OfficerPage />} />
 
         <Route path="/probation-officer" element={<ProbationOfficerPage />} />
+        <Route path="/probation-officer/:id" element={<ProbationOfficerPage />} />
 
         <Route path="/appeal" element={<AppealPage />} />
         <Route path="/appeal/:id" element={<AppealPage />} />
 
         <Route path="/crime-charge" element={<CrimeChargePage />} />
+        <Route path="/crime-charge/Lid" element={<CrimeChargePage />} />
+
         <Route path="/sentence" element={<SentencePage />} />
+        <Route path="/sentence/:id" element={<SentencePage />} />
 
       </Route>
     </Route >

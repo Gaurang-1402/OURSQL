@@ -29,11 +29,47 @@ export const getCrimeIDs = catchAsync(async (req, res, next) => {
 
 export const createCriminal = catchAsync(async (req, res, next) => {
     res.send('Criminal create');
-});
+})
 
 export const createOfficer = catchAsync(async (req, res, next) => {
-    res.send('Officer create');
+    const { last, first, precinct, badge, phone, status } = req.body;
+    const newId = Math.floor(Math.random() * 100000000);
+
+    const query = `INSERT INTO officers (officer_id, last, first, precinct, badge, phone, status) VALUES (${newId}, '${last}', '${first}', '${precinct}', '${badge}', '${phone}', '${status}')`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            message: 'Created officer successfully',
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Invalid data',
+        });
+        console.log(err);
+    }
 });
+
+export const getOfficer = catchAsync(async (req, res, next) => {
+    const officerId = req.params.id;
+    const query = `SELECT * FROM officers WHERE officer_id = ${officerId}`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            status: 'success',
+            data: {
+                data: result[0]
+            }
+        });
+    }
+    catch (err) {
+        console.log(err);
+
+        res.status(500).json({
+            message: 'Invalid ID provided',
+        });
+    }
+})
 
 export const createProbationOfficer = catchAsync(async (req, res, next) => {
     res.send('Probation Officer create');

@@ -64,7 +64,6 @@ const AppealPage = () => {
         console.error(error);
       }
     };
-
   }
   useEffect(() => {
     getCrimeIDs();

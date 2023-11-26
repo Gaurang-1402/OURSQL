@@ -10,8 +10,26 @@ export const updateCriminal = catchAsync(async (req, res, next) => {
 });
 
 export const updateOfficer = catchAsync(async (req, res, next) => {
-    res.send('Officer update');
+    const officerId = req.params.id;
+    const { last, first, precinct, badge, phone, status } = req.body;
+
+    console.log(last, first, precinct, badge, phone, status, officerId)
+
+    const query = `UPDATE officers SET last = '${last}', first = '${first}', precinct = '${precinct}', badge = '${badge}', phone = '${phone}', status = '${status}' WHERE officer_id = ${officerId}`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            message: 'Updated officer successfully',
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Invalid data',
+        });
+        console.log(err);
+    }
 });
+
 
 export const updateProbationOfficer = catchAsync(async (req, res, next) => {
     res.send('Probation Officer update');

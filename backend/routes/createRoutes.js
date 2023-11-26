@@ -6,7 +6,8 @@ import {
     createProbationOfficer, createAppeal, createSentence, createCrimeCharge,
 
     getCrimeIDs,
-    getAppeal
+    getAppeal,
+    getOfficer
 } from '../controllers/createControllers.js';
 import { protect, admin } from '../utils/authMiddleware.js';
 
@@ -17,6 +18,8 @@ router.route('/crime').get(protect, admin, getCrimeIDs);
 
 router.route('/criminal').post(protect, admin, createCriminal);
 router.route('/officer').post(protect, admin, createOfficer);
+router.route('/officer/:id').get(protect, admin, getOfficer);
+
 router.route('/probation-officer').post(protect, admin, createProbationOfficer);
 
 router.route('/appeal').post(protect, admin, createAppeal);

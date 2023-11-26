@@ -9,16 +9,7 @@ export const getCriminalSearchResults = catchAsync(async (req, res, next) => {
     res.send('Criminal Search Results');
 });
 
-// {
-//     "lastName": "Brown",
-//     "selectedLastNameFilter":  "contains",
-//     "firstName": "Megan",
-//     "selectedFirstNameFilter": "contains",
-//     "precinct": "P010",
-//     "badge": "B0010",
-//     "phone": "1234567890",
-//     "selectedStatus": "A"
-//   }
+
 export const getOfficerSearchResults = catchAsync(async (req, res, next) => {
     const { lastName, selectedLastNameFilter, firstName, selectedFirstNameFilter, precinct, badge, phone, selectedStatus } = req.body;
 

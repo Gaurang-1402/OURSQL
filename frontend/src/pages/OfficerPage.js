@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Col, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -10,10 +10,9 @@ import { Navigate } from 'react-router-dom';
 const OfficerPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const { officerId } = useParams();
+  const { id:officerId } = useParams();
 
   const [officerDetails, setOfficerDetails] = useState({
-    officer_id: '',
     last: '',
     first: '',
     precinct: '',
@@ -21,6 +20,37 @@ const OfficerPage = () => {
     phone: '',
     status: 'A' // default status
   });
+
+  const [isUpdate, setIsUpdate] = useState(false);
+
+  // get officer data
+  const getOfficer = async () => {
+    if (officerId) { // Use officerId instead of appealId
+      try {
+        const response = await axios.get(`${BASE_URL}/api/officer/${officerId}`, {
+          withCredentials: true
+        });
+        const officer = response.data.data.data[0];
+        console.log(officer);
+
+        setIsUpdate(true);
+        setOfficerDetails({
+          last: officer.last,
+          first: officer.first,
+          precinct: officer.precinct,
+          badge: officer.badge,
+          phone: officer.phone,
+          status: officer.status
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getOfficer();
+  }, [officerId]); // Added officerId as a dependency
 
   const handleChange = (e) => {
     setOfficerDetails({ ...officerDetails, [e.target.name]: e.target.value });
@@ -34,14 +64,14 @@ const OfficerPage = () => {
       const url = officerId ? `${BASE_URL}/api/officer/${officerId}` : `${BASE_URL}/api/officer`;
       const method = officerId ? 'put' : 'post';
 
-      const response = await axios[method](url, officerDetails, {
+      await axios[method](url, officerDetails, {
         withCredentials: true
       });
 
       toast.success(`Officer ${officerId ? 'updated' : 'added'} successfully`);
-      navigate('/officers');
+      navigate('/');
     } catch (error) {
-      toast.error(error.data.message);
+      toast.error(`Officer was not ${officerId ? 'updated' : 'added'} successfully`);
       console.error(error);
     }
   };
@@ -51,20 +81,6 @@ const OfficerPage = () => {
       <h1>{officerId ? 'Edit Officer' : 'Add Officer'}</h1>
       <Form onSubmit={handleSubmit}>
         <Row>
-          { !officerId && (
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>Officer ID</Form.Label>
-                <Form.Control
-                  type="number"
-                  name="officer_id"
-                  value={officerDetails.officer_id}
-                  onChange={handleChange}
-                  placeholder="Enter Officer ID"
-                />
-              </Form.Group>
-            </Col>
-          )}
           <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Last Name</Form.Label>
