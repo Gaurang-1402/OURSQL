@@ -31,7 +31,6 @@ const SentenceSearchPage = () => {
         withCredentials: true
       });
       toast.success('Sentence search successful');
-      console.log(response.data.data.results);
       setSentences(response.data.data.results);
     } catch (error) {
       toast.error(error.data.message);
@@ -127,7 +126,7 @@ const SentenceSearchPage = () => {
                     <td>
                       {userInfo && userInfo.isAdmin && (
                         <>
-                          <Link to={`/sentence/edit/${sentence.sentence_id}`}>
+                          <Link to={`/sentence/${sentence.sentence_id}`}>
                             <Button variant='light' className='btn-sm'>
                               <FaEdit />
                             </Button>
