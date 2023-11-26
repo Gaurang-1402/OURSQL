@@ -15,7 +15,6 @@ const router = express.Router();
 router.route('/crime').post(protect, admin, createCrime);
 router.route('/crime').get(protect, admin, getCrimeIDs);
 
-
 router.route('/criminal').post(protect, admin, createCriminal);
 router.route('/officer').post(protect, admin, createOfficer);
 router.route('/probation-officer').post(protect, admin, createProbationOfficer);

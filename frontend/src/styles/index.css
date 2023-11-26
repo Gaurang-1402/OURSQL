@@ -10,6 +10,11 @@ main {
   color: #f8e825;
 }
 
+.input-box {
+  max-width: 400px; /* Adjust this value to your preference */
+}
+
+
 .rating-text {
   font-size: 0.8rem;
   font-weight: 600;

@@ -43,8 +43,6 @@ export const createAppeal = catchAsync(async (req, res, next) => {
     const { startHearingDate, startFilingDate, selectedCrimeID, selectedStatus } = req.body;
     const newId = Math.floor(Math.random() * 100000);
 
-    console.log(startHearingDate, startFilingDate, selectedStatus, selectedCrimeID, newId)
-
     const query = `INSERT INTO appeals (appeal_id, crime_id, filing_date, hearing_date, status) VALUES (${newId}, ${selectedCrimeID}, '${startFilingDate}', '${startHearingDate}', '${selectedStatus}')`;
     try {
         const result = await db.query(query);

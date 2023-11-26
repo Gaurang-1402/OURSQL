@@ -81,6 +81,7 @@ const registerUser = catchAsync(async (req, res) => {
             name: name,
             email: email,
             isAdmin: isAdmin === 'Y',
+            message: "Registration is successful"
         });
     }
     catch (error) {
