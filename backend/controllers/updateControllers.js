@@ -6,7 +6,26 @@ export const updateCrime = catchAsync(async (req, res, next) => {
 });
 
 export const updateCriminal = catchAsync(async (req, res, next) => {
-    res.send('Criminal update');
+    const criminalId = req.params.id;
+    const { last, first, zip, phone, p_status, v_status } = req.body;
+
+    console.log(last, first, zip, phone, p_status, v_status, probOfficerId)
+
+    const query = `UPDATE criminals SET last = '${last}', first = '${first}', zip = '${zip}', phone = '${phone}', v_status = '${v_status}', p_status = '${p_status}' WHERE criminal_ids = ${criminalId}`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            message: 'Updated probation officer successfully',
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Invalid data',
+        });
+        console.log(err);
+    }
+    
+    //res.send('Criminal update');
 });
 
 export const updateOfficer = catchAsync(async (req, res, next) => {
@@ -32,7 +51,25 @@ export const updateOfficer = catchAsync(async (req, res, next) => {
 
 
 export const updateProbationOfficer = catchAsync(async (req, res, next) => {
-    res.send('Probation Officer update');
+    const probOfficerId = req.params.id;
+    const { last, first, zip, phone, email, status } = req.body;
+
+    console.log(last, first, zip, phone, email, status, probOfficerId)
+
+    const query = `UPDATE officers SET last = '${last}', first = '${first}', zip = '${zip}', phone = '${phone}', email = '${email}', status = '${status}' WHERE officer_id = ${probOfficerId}`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            message: 'Updated probation officer successfully',
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Invalid data',
+        });
+        console.log(err);
+    }
+    //res.send('Probation Officer update');
 });
 
 export const updateAppeal = catchAsync(async (req, res, next) => {

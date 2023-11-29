@@ -6,7 +6,35 @@ export const deleteCrime = catchAsync(async (req, res, next) => {
 });
 
 export const deleteCriminal = catchAsync(async (req, res, next) => {
-    res.send('Criminal Delete');
+    
+    const criminalId = req.params.id;
+
+    try {
+        // First, delete related records in sentences
+        const deleteSentencesQuery = `DELETE FROM sentences WHERE criminal_id = ${criminalId}`;
+        await db.query(deleteSentencesQuery);
+
+        // Then, delete the officer
+        const deleteCriminalsQuery = `DELETE FROM criminals WHERE criminal_id = ${criminalId}`;
+        const result = await db.query(deleteCriminalsQuery);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({
+                message: 'Criminal not found'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Success, criminal deleted'
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: 'Error, criminal not deleted'
+        });
+    }
+    //res.send('Criminal Delete');
 });
 
 // TODO: Test
@@ -43,7 +71,33 @@ export const deleteOfficer = catchAsync(async (req, res, next) => {
 
 
 export const deleteProbationOfficer = catchAsync(async (req, res, next) => {
-    res.send('Probation Officer Delete');
+    const probOfficerID = req.params.id;
+
+    try {
+        // First, delete related records in sentences
+        const deleteSentencesQuery = `DELETE FROM sentences WHERE prob_id = ${probOfficerID}`;
+        await db.query(deleteSentencesQuery);
+
+        // Then, delete the officer
+        const deleteProbOfficerQuery = `DELETE FROM prob_officer WHERE prob_id = ${probOfficerID}`;
+        const result = await db.query(deleteProbOfficerQuery);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({
+                message: 'Officer not found'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Success, probation officer deleted'
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            message: 'Error, probation officer not deleted'
+        });
+    }
 });
 
 

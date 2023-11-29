@@ -9,7 +9,9 @@ import {
     getAppeal,
     getOfficer,
     getProbationOfficerIDs,
+    getProbationOfficer,
     getCriminalIDs,
+    getCriminal,
     getSentence,
     getCrimeCodeIDs,
     getCrimeCharge
@@ -23,12 +25,14 @@ router.route('/crime').get(protect, admin, getCrimeIDs);
 
 router.route('/criminal').post(protect, admin, createCriminal);
 router.route('/criminal').get(protect, admin, getCriminalIDs);
+router.route('/criminal/:id').get(protect, admin, getCriminal);
 
 router.route('/officer').post(protect, admin, createOfficer);
 router.route('/officer/:id').get(protect, admin, getOfficer);
 
 router.route('/probation-officer').post(protect, admin, createProbationOfficer);
 router.route('/probation-officer').get(protect, admin, getProbationOfficerIDs);
+router.route('/probation-officer/:id').get(protect, admin, getProbationOfficer);
 
 router.route('/appeal').post(protect, admin, createAppeal);
 router.route('/appeal/:id').get(protect, admin, getAppeal);
