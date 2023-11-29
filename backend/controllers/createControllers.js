@@ -178,7 +178,7 @@ export const getCrimeCodeIDs = catchAsync(async (req, res, next) => {
 
 export const createProbationOfficer = catchAsync(async (req, res, next) => {
     const { last, first, zip, phone, email, status } = req.body;
-    const newId = Math.floor(Math.random() * 100000000);
+    const newId = Math.floor(Math.random() * 10000);
 
     const query = `INSERT INTO prob_officer (prob_id, last, first, zip, phone, email, status) VALUES (${newId}, '${last}', '${first}', '${zip}', '${phone}', '${email}', '${status}')`;
     try {
@@ -289,7 +289,7 @@ export const getAppeal = catchAsync(async (req, res, next) => {
 
 export const createCriminal = catchAsync(async (req, res, next) => {
     const { last, first, zip, phone, v_status, p_status } = req.body;
-    const newId = Math.floor(Math.random() * 100000000);
+    const newId = Math.floor(Math.random() * 100000);
 
     const query = `INSERT INTO criminal (criminal_id, last, first, zip, phone, v_status, p_status) VALUES (${newId}, '${last}', '${first}', '${zip}', '${phone}', '${v_status}', '${p_status}')`;
     try {
