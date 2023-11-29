@@ -6,7 +6,59 @@ export const getCrimeSearchResults = catchAsync(async (req, res, next) => {
 });
 
 export const getCriminalSearchResults = catchAsync(async (req, res, next) => {
-    res.send('Criminal Search Results');
+    const { lastName, selectedLastNameFilter, firstName, selectedFirstNameFilter, zip, phone, selectedVStatus, selectedPStatus } = req.body;
+
+    console.log(
+        lastName, selectedLastNameFilter, firstName, selectedFirstNameFilter, zip, phone, selectedVStatus, selectedPStatus
+    );
+
+    let query = 'SELECT * FROM criminals WHERE 1=1';
+
+    if (selectedVStatus) {
+        query += ` AND v_status = '${selectedVStatus}'`;
+    }
+
+    if (selectedPStatus) {
+        query += ` AND p_status = '${selectedPStatus}'`;
+    }
+
+    if (lastName) {
+        query += selectedLastNameFilter === 'startswith' ?
+            ` AND last LIKE '${lastName}%'` :
+            ` AND last LIKE '%${lastName}%'`;
+    }
+
+    if (firstName) {
+        query += selectedFirstNameFilter === 'startswith' ?
+            ` AND first LIKE '${firstName}%'` :
+            ` AND first LIKE '%${firstName}%'`;
+    }
+
+    if (zip) {
+        query += ` AND zip = '${zip}'`;
+    }
+
+    if (phone) {
+        query += ` AND phone = '${phone}'`;
+    }
+
+    try {
+        const results = await db.query(query);
+
+        res.status(200).json({
+            data: {
+                results: results[0]
+            }
+        })
+
+    } catch (error) {
+
+        console.log(error)
+        res.status(500).json({
+            message: 'Something went wrong'
+        })
+    }
+    //res.send('Criminal Search Results');
 });
 
 
