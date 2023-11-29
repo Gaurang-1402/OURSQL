@@ -33,9 +33,8 @@ const OfficerSearchPage = () => {
   const [selectedStatus, setSelectedStatus] = useState({});
   const [statusOptions,] = useState([
     { id: 0, label: 'Select Option', value: '' },
-    { id: 1, label: 'P (Pending)', value: 'P' },
-    { id: 2, label: 'A (Approved)', value: 'A' },
-    { id: 3, label: 'D (Disapproved)', value: 'D' },
+    { id: 1, label: 'I (Inactive)', value: 'I' },
+    { id: 2, label: 'A (Active)', value: 'A' }
   ]);
 
   const handleDeleteSuccess = (deletedId) => {
