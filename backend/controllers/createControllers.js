@@ -2,7 +2,28 @@ import catchAsync from "../utils/catchAsync.js";
 import db from '../config/db.js';
 
 export const createCrime = catchAsync(async (req, res, next) => {
-    res.send('Crime create');
+    const { criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date } = req.body;
+    const newId = Math.floor(Math.random() * 1000000000);
+
+    console.log(criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date);
+
+    let query = `INSERT INTO crimes (criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date )
+            VALUES (${newId}, ${criminal_id}, ${classification}, '${date_charged}', ${status},
+                    ${hearing_date}, ${appeal_cut_date})`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            message: 'Created crime successfully',
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Invalid data',
+        });
+        console.log(err);
+    }
+    
+    //res.send('Crime create');
 });
 
 export const getCrimeIDs = catchAsync(async (req, res, next) => {
@@ -25,6 +46,27 @@ export const getCrimeIDs = catchAsync(async (req, res, next) => {
         console.log(err);
     }
 });
+
+export const getCrime = catchAsync(async (req, res, next) => {
+    const crimeId = req.params.id;
+    const query = `SELECT * FROM crimes WHERE crime_id = ${crimeId}`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            status: 'success',
+            data: {
+                data: result[0]
+            }
+        });
+    }
+    catch (err) {
+        console.log(err);
+
+        res.status(500).json({
+            message: 'Invalid ID provided',
+        });
+    }
+})
 
 
 export const createSentence = catchAsync(async (req, res, next) => {

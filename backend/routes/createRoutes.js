@@ -3,17 +3,22 @@ import {
     createCrime,
     createCriminal,
     createOfficer,
-    createProbationOfficer, createAppeal, createSentence, createCrimeCharge,
+    createProbationOfficer,
+    createAppeal,
+    createSentence,
+    createCrimeCharge,
 
     getCrimeIDs,
+    getProbationOfficerIDs,
+    getCriminalIDs,
+    getCrimeCodeIDs,
+    
+    getCrime,
     getAppeal,
     getOfficer,
-    getProbationOfficerIDs,
     getProbationOfficer,
-    getCriminalIDs,
     getCriminal,
     getSentence,
-    getCrimeCodeIDs,
     getCrimeCharge
 } from '../controllers/createControllers.js';
 import { protect, admin } from '../utils/authMiddleware.js';
@@ -22,6 +27,7 @@ const router = express.Router();
 
 router.route('/crime').post(protect, admin, createCrime);
 router.route('/crime').get(protect, admin, getCrimeIDs);
+router.route('/crime/:id').get(protect, admin, getCrime);
 
 router.route('/criminal').post(protect, admin, createCriminal);
 router.route('/criminal').get(protect, admin, getCriminalIDs);

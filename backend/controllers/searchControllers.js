@@ -2,7 +2,56 @@ import catchAsync from "../utils/catchAsync.js";
 import db from '../config/db.js';
 
 export const getCrimeSearchResults = catchAsync(async (req, res, next) => {
-    res.send('Crime Search Results');
+    const { criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date } = req.body;
+
+    console.log(criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date);
+    let query = 'SELECT * FROM crimes WHERE 1=1';
+
+    if (criminal_id) {
+        query += ` AND criminal_id = '${criminal_id}'`;
+    }
+
+    if (classification) {
+        query += ` AND classification = '${classification}'`;
+    }
+
+    if (date_charged) {
+        query += ` AND date_charged >= '${date_charged}'`;
+    }
+
+    if (status) {
+        query += ` AND status = '${status}'`;
+    }
+
+    if (hearing_date) {
+        query += ` AND hearing_date >= '${hearing_date}'`;
+    }
+
+    if (appeal_cut_date) {
+        query += ` AND appeal_cut_date >= '${appeal_cut_date}'`;
+    }
+    
+
+    try {
+        const results = await db.query(query);
+
+        res.status(200).json({
+            data: {
+                results: results[0]
+            }
+        })
+
+    } catch (error) {
+            
+            console.log(error)
+            res.status(500).json({
+                message: 'Something went wrong'
+            })
+        }
+
+
+
+    // res.send('Crime Search Results');
 });
 
 export const getCriminalSearchResults = catchAsync(async (req, res, next) => {
@@ -241,7 +290,7 @@ export const getSentenceSearchResults = catchAsync(async (req, res, next) => {
             message: 'Something went wrong'
         })
     }
-    res.send('Sentence Search Results');
+    // res.send('Sentence Search Results');
 })
 
 // {

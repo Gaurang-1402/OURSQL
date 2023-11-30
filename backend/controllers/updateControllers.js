@@ -2,7 +2,27 @@ import catchAsync from "../utils/catchAsync.js";
 import db from '../config/db.js';
 
 export const updateCrime = catchAsync(async (req, res, next) => {
-    res.send('Crime update');
+    const { criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date } = req.body;
+    const crimeId = req.params.id;
+
+    console.log(criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date);
+    
+    const query = `UPDATE crimes SET criminal_id = ${criminal_id}, classification = '${classification}', date_charged = '${date_charged}',
+                    status = '${status}', hearing_date = '${hearing_date}', appeal_cut_date = '${appeal_cut_date}' WHERE crime_id = ${crimeId}`;
+    try {
+        const result = await db.query(query);
+        res.status(200).json({
+            message: 'Updated crime successfully',
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Invalid data',
+        });
+        console.log(err);
+    }
+    
+    //res.send('Crime update');
 });
 
 export const updateCriminal = catchAsync(async (req, res, next) => {
