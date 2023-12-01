@@ -98,6 +98,7 @@ const registerUser = catchAsync(async (req, res) => {
 const logoutUser = catchAsync(async (req, res) => {
     res.cookie('jwt', 'logout', {
         httpOnly: true,
+        secure: process.env.NODE_ENV !== 'development', // Use secure cookies in production
         expires: new Date(0),
     });
     res.status(200).json({
