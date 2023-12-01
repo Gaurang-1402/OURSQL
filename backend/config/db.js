@@ -5,17 +5,17 @@ import colors from 'colors';
 dotenv.config();
 
 // Set up MySQL connection
-const db = mysql.createPool({
+const dbNonAdmin = mysql.createPool({
     host: process.env.DB_IP_ADDRESS,
-    user: process.env.DB_USERNAME,
-    password: process.env.PASSWORD,
+    user: process.env.NON_ADMIN_DB_USERNAME,
+    password: process.env.NON_ADMIN_DB_PASSWORD,
     database: process.env.DB_NAME
 }).promise();
 
 // Attempt to get a connection
-db.getConnection()
+dbNonAdmin.getConnection()
     .then(() => {
-        console.log(`Connected to the MySQL database, ${process.env.DB_NAME}.`.yellow.bold);
+        console.log(`Non-admin connected to the MySQL database, ${process.env.DB_NAME}.`.yellow.bold);
     })
     .catch((error) => {
         console.error("Error connecting to the MySQL database:".red.bold, error);
@@ -23,4 +23,24 @@ db.getConnection()
     });
 
 
-export default db;
+    // Set up MySQL connection
+const dbAdmin = mysql.createPool({
+    host: process.env.DB_IP_ADDRESS,
+    user: process.env.ADMIN_DB_USERNAME,
+    password: process.env.ADMIN_DB_PASSWORD,
+    database: process.env.DB_NAME
+}).promise();
+
+// Attempt to get a connection
+dbAdmin.getConnection()
+    .then(() => {
+        console.log(`Admin connected to the MySQL database, ${process.env.DB_NAME}.`.yellow.bold);
+    })
+    .catch((error) => {
+        console.error("Error connecting to the MySQL database:".red.bold, error);
+        // Handle error appropriately (e.g., retry connection, exit process, etc.)
+    });
+
+
+
+export {dbAdmin, dbNonAdmin};

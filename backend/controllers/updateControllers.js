@@ -1,5 +1,5 @@
 import catchAsync from "../utils/catchAsync.js";
-import db from '../config/db.js';
+import {dbAdmin} from '../config/db.js';
 
 export const updateCrime = catchAsync(async (req, res, next) => {
     const { criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date } = req.body;
@@ -10,7 +10,7 @@ export const updateCrime = catchAsync(async (req, res, next) => {
     const query = `UPDATE crimes SET criminal_id = ${criminal_id}, classification = '${classification}', date_charged = '${date_charged}',
                     status = '${status}', hearing_date = '${hearing_date}', appeal_cut_date = '${appeal_cut_date}' WHERE crime_id = ${crimeId}`;
     try {
-        const result = await db.query(query);
+        const result = await dbAdmin.query(query);
         res.status(200).json({
             message: 'Updated crime successfully',
         });
@@ -33,7 +33,7 @@ export const updateCriminal = catchAsync(async (req, res, next) => {
 
     const query = `UPDATE criminals SET last = '${last}', first = '${first}', zip = '${zip}', phone = '${phone}', v_status = '${v_status}', p_status = '${p_status}' WHERE criminal_ids = ${criminalId}`;
     try {
-        const result = await db.query(query);
+        const result = await dbAdmin.query(query);
         res.status(200).json({
             message: 'Updated probation officer successfully',
         });
@@ -56,7 +56,7 @@ export const updateOfficer = catchAsync(async (req, res, next) => {
 
     const query = `UPDATE officers SET last = '${last}', first = '${first}', precinct = '${precinct}', badge = '${badge}', phone = '${phone}', status = '${status}' WHERE officer_id = ${officerId}`;
     try {
-        const result = await db.query(query);
+        const result = await dbAdmin.query(query);
         res.status(200).json({
             message: 'Updated officer successfully',
         });
@@ -78,7 +78,7 @@ export const updateProbationOfficer = catchAsync(async (req, res, next) => {
 
     const query = `UPDATE officers SET last = '${last}', first = '${first}', zip = '${zip}', phone = '${phone}', email = '${email}', status = '${status}' WHERE officer_id = ${probOfficerId}`;
     try {
-        const result = await db.query(query);
+        const result = await dbAdmin.query(query);
         res.status(200).json({
             message: 'Updated probation officer successfully',
         });
@@ -100,7 +100,7 @@ export const updateAppeal = catchAsync(async (req, res, next) => {
 
     const query = `UPDATE appeals SET crime_id = ${selectedCrimeID}, filing_date = '${startFilingDate}', hearing_date = '${startHearingDate}', status = '${selectedStatus}' WHERE appeal_id = ${appealId}`;
     try {
-        const result = await db.query(query);
+        const result = await dbAdmin.query(query);
         res.status(200).json({
             message: 'Updated appeal successfully',
         });
@@ -146,7 +146,7 @@ export const updateSentence = catchAsync(async (req, res, next) => {
 
     const query = `UPDATE sentences SET criminal_id = ${criminal_id}, type = '${type}', prob_id = ${prob_id}, start_date = '${start_date}', end_date = '${end_date}', violations = ${violations} WHERE sentence_id = ${sentenceId}`;
     try {
-        const result = await db.query(query);
+        const result = await dbAdmin.query(query);
         res.status(200).json({
             message: 'Updated sentence successfully',
         });
@@ -167,7 +167,7 @@ export const updateCrimeCharge = catchAsync(async (req, res, next) => {
 
     const query = `UPDATE crime_charges SET crime_id = ${crime_id}, crime_code = '${crime_code}', charge_status = '${charge_status}', payment_due_date = '${payment_due_date}' WHERE charge_id = ${chargeId}`;
     try {
-        const result = await db.query(query);
+        const result = await dbAdmin.query(query);
         res.status(200).json({
             message: 'Updated crime charge successfully',
         });

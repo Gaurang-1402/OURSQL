@@ -6,6 +6,7 @@ import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import probOfficerImage from '../images/probation-officer.jpeg';
 
 const ProbationOfficerPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -84,7 +85,7 @@ const ProbationOfficerPage = () => {
       <h1>{probOfficerId ? 'Edit Probation Officer' : 'Add Probation Officer'}</h1>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col md={6}>
+          <Col md={7}>
             <Form.Group className="mb-3">
               <Form.Label>Last Name</Form.Label>
               <Form.Control
@@ -95,8 +96,6 @@ const ProbationOfficerPage = () => {
                 placeholder="Enter Last Name"
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>First Name</Form.Label>
               <Form.Control
@@ -107,8 +106,6 @@ const ProbationOfficerPage = () => {
                 placeholder="Enter First Name"
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Zip</Form.Label>
               <Form.Control
@@ -119,8 +116,6 @@ const ProbationOfficerPage = () => {
                 placeholder="Enter Zip Code"
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
@@ -131,8 +126,6 @@ const ProbationOfficerPage = () => {
                 placeholder="Enter Phone Number"
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
               <Form.Control
@@ -143,8 +136,6 @@ const ProbationOfficerPage = () => {
                 placeholder="Enter Email"
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Status</Form.Label>
               <Form.Select
@@ -157,6 +148,11 @@ const ProbationOfficerPage = () => {
               </Form.Select>
             </Form.Group>
           </Col>
+          <Col md={7}>
+          <img className='icon-image' src={probOfficerImage} alt="Description" style={{ width: '100%' }} />
+
+          </Col>
+
         </Row>
         <Button variant="primary" type="submit">
           {probOfficerId ? 'Update Probation Officer' : 'Add Probation Officer'}

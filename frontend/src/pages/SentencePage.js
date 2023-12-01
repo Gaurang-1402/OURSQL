@@ -7,6 +7,8 @@ import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useSelector } from 'react-redux';
 
+import sentenceImage from '../images/sentence.jpeg';
+
 const SentencePage = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -130,7 +132,7 @@ const SentencePage = () => {
       <h1>{isUpdate ? 'Update Sentence' : 'Create Sentence'}</h1>
       <div className="App" style={{ marginTop: '15vh' }}>
         <Row>
-          <Col md={9}>
+          <Col md={7}>
             <Form onSubmit={handleSubmit}>
               {/* Dropdown for Criminal ID */}
               <Form.Group className="mb-3">
@@ -169,12 +171,12 @@ const SentencePage = () => {
               {/* Sentence Type */}
               <Form.Group className="mb-3">
                 <Form.Label>Sentence Type</Form.Label>
-                <Form.Control as="select" value={sentenceType} onChange={e => setSentenceType(e.target.value)}>
+                <Form.Select className='input-box' value={sentenceType} onChange={e => setSentenceType(e.target.value)}>
                   <option value="">Select Type</option>
                   <option value="J">Jail</option>
                   <option value="H">House Arrest</option>
                   <option value="P">Probation</option>
-                </Form.Control>
+                </Form.Select>
               </Form.Group>
 
               {/* Start Date */}
@@ -192,14 +194,15 @@ const SentencePage = () => {
               {/* Violations */}
               <Form.Group className="mb-3">
                 <Form.Label>Violations</Form.Label>
-                <Form.Control type="number" value={violations} onChange={e => setViolations(e.target.value)} placeholder="Enter number of violations" />
+                <Form.Control className='input-box' type="number" value={violations} onChange={e => setViolations(e.target.value)} placeholder="Enter number of violations" />
               </Form.Group>
 
               <Button type="submit" variant="primary">{isUpdate ? 'Update Sentence' : 'Create Sentence'}</Button>
             </Form>
           </Col>
-          <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <Col className='icon-image-parent' md={4} style={{ border: '1px solid #ddd', padding: '20px' }}>
             {/* Placeholder for additional content or images */}
+            <img className='icon-image' src={sentenceImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>

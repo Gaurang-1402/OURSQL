@@ -187,9 +187,9 @@ const AppealPage = () => {
               }
             </Form>
           </Col>
-          <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <Col md={3} className='icon-image-parent' style={{ padding: '20px' }}>
             {/* Placeholder for image */}
-            <img src="path_to_your_image.jpg" alt="Description" style={{ width: '100%' }} />
+            <img className='icon-image' src="path_to_your_image.jpg" alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>

@@ -108,9 +108,9 @@ const AppealSearchPage = () => {
               }
             </Form>
           </Col>
-          <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <Col className='icon-image-parent' md={3} style={{ padding: '20px' }}>
             {/* Placeholder for image */}
-            <img src={appealImage} alt="Description" style={{ width: '100%' }} />
+            <img className='icon-image' src={appealImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>
@@ -126,7 +126,11 @@ const AppealSearchPage = () => {
                 <th>STATUS</th>
                 <th>FILING DATE</th>
                 <th>HEARING DATE</th>
-                <th>ACTIONS</th>
+                {
+                  userInfo && userInfo.isAdmin && (
+                    <th>Actions</th>
+                  )
+                }
               </tr>
             </thead>
             <tbody>

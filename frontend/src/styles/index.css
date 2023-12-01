@@ -56,3 +56,24 @@ table th {
   bottom: 0;
   background: rgba(0, 0, 0, 0.5);
 }
+
+.icon-image-parent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-image {
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+}

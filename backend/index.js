@@ -7,6 +7,7 @@ import userRouter from './routes/userRoutes.js';
 import deleteRouter from './routes/deleteRoutes.js';
 import createRouter from './routes/createRoutes.js';
 import updateRouter from './routes/updateRoutes.js';
+import getRouter from './routes/getRoutes.js';
 import cookieParser from 'cookie-parser';
 import colors from 'colors';
 
@@ -38,6 +39,7 @@ app.use('/api/users', userRouter);
 app.use('/api', deleteRouter);
 app.use('/api', createRouter);
 app.use('/api', updateRouter);
+app.use('/api', getRouter);
 
 
 

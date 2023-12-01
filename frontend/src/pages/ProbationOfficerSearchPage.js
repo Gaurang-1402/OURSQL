@@ -184,9 +184,9 @@ const ProbationOfficerSearchPage = () => {
               }
             </Form>
           </Col>
-          <Col md={3} style={{padding: '20px' }}>
+          <Col className='icon-image-parent' md={3} style={{padding: '20px' }}>
             {/* Placeholder for image */}
-            <img src={sProbationOfficerImage} alt="Description" style={{ width: '100%' }} />
+            <img className='icon-image' src={sProbationOfficerImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>
@@ -202,7 +202,11 @@ const ProbationOfficerSearchPage = () => {
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Status</th>
-                <th>Actions</th>
+                {
+                  userInfo && userInfo.isAdmin && (
+                    <th>Actions</th>
+                  )
+                }
               </tr>
             </thead>
             <tbody>

@@ -161,9 +161,9 @@ const CrimeSearchPage = () => {
               )}
             </Form>
           </Col>
-          <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <Col className='icon-image-parent' md={3} style={{ padding: '20px' }}>
             {/* Placeholder for additional content or images */}
-            <img src={sCrimeImage} alt="Description" style={{ width: '100%' }} />
+            <img className='icon-image' src={sCrimeImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>
@@ -179,7 +179,11 @@ const CrimeSearchPage = () => {
               <th>Status</th>
               <th>Hearing Date</th>
               <th>Appeal Cut Date</th>
-              <th>Actions</th>
+              {
+                userInfo && userInfo.isAdmin && (
+                  <th>Actions</th>
+                )
+              }
             </tr>
           </thead>
           <tbody>
