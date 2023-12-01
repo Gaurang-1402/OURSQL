@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import DeleteModal from '../components/DeleteModal';
 import { Link } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
+import sSentenceImage from '../images/s-sentence.jpeg';
 
 const SentenceSearchPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -58,12 +59,12 @@ const SentenceSearchPage = () => {
 
               <Form.Group className="mb-5">
                 <Form.Label >Type of Sentence</Form.Label>
-                <Form.Control as="select" className='input-box' onChange={(e) => setSentenceType(e.target.value)}>
+                <Form.Select className='input-box' onChange={(e) => setSentenceType(e.target.value)}>
                   <option value="">Select Sentence Type</option>
                   <option value="J">Jail</option>
                   <option value="H">House Arrest</option>
                   <option value="P">Probation</option>
-                </Form.Control>
+                </Form.Select>
               </Form.Group>
 
               <Form.Group className="mb-5">
@@ -91,6 +92,7 @@ const SentenceSearchPage = () => {
           </Col>
           <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
             {/* Placeholder for additional content or images */}
+            <img src={sSentenceImage} alt="Description" style={{ width: '100%' }} />
           </Col>
 
 

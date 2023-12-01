@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import DeleteModal from '../components/DeleteModal';
 import { Link } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
+import sCrimeImage from '../images/s-crime.jpeg';
 
 const CrimeSearchPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -162,6 +163,7 @@ const CrimeSearchPage = () => {
           </Col>
           <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
             {/* Placeholder for additional content or images */}
+            <img src={sCrimeImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>

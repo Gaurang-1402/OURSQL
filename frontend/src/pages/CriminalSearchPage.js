@@ -7,6 +7,7 @@ import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useSelector } from 'react-redux';
 import DeleteModal from '../components/DeleteModal';
+import criminalImage from '../images/criminal.jpeg';
 
 const CriminalSearchPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -106,7 +107,7 @@ const CriminalSearchPage = () => {
                     </Dropdown>
                   </Col>
                   <Col md={8}>
-                    <Form.Control className='m-2' type="text" onChange={(e) => setFirstName(e.target.value)} placeholder="Enter first name" />
+                    <Form.Control className='m-2 input-box' type="text" onChange={(e) => setFirstName(e.target.value)} placeholder="Enter first name" />
                   </Col>
                 </Row>
               </Form.Group>
@@ -199,7 +200,7 @@ const CriminalSearchPage = () => {
           </Col>
           <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
             {/* Placeholder for image */}
-            <img src="path_to_your_image.jpg" alt="Description" style={{ width: '100%' }} />
+            <img src={criminalImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>

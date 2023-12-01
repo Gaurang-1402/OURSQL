@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import DeleteModal from '../components/DeleteModal';
 import { Link } from 'react-router-dom';
 import { FaEdit } from 'react-icons/fa';
+import sCrimeChargeImage from '../images/s-crime-charges.jpg';
 
 const CrimeChargeSearchPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -140,6 +141,7 @@ const CrimeChargeSearchPage = () => {
                   value={chargeStatus}
                   onChange={(e) => setChargeStatus(e.target.value)}
                 >
+                  <option value="">Select Status</option>
                   <option value="PD">PD (Pending)</option>
                   <option value="PL">GL (Guilty)</option>
                   <option value="NG">NG (Not Guilty)</option>
@@ -162,6 +164,7 @@ const CrimeChargeSearchPage = () => {
           </Col>
           <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
             {/* Placeholder for additional content or images */}
+            <img src={sCrimeChargeImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>
