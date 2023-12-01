@@ -106,7 +106,7 @@ const CriminalSearchPage = () => {
                     </Dropdown>
                   </Col>
                   <Col md={8}>
-                    <Form.Control className='m-2' type="text" onChange={(text) => setFirstName} placeholder="Enter first name" />
+                    <Form.Control className='m-2' type="text" onChange={(e) => setFirstName(e.target.value)} placeholder="Enter first name" />
                   </Col>
                 </Row>
               </Form.Group>
@@ -132,19 +132,19 @@ const CriminalSearchPage = () => {
                     </Dropdown>
                   </Col>
                   <Col md={8}>
-                    <Form.Control className='m-2 input-box' type="text" onChange={(text) => setLastName(text)} placeholder="Enter last name" />
+                    <Form.Control className='m-2 input-box' type="text" onChange={(e) => setLastName(e.target.value)} placeholder="Enter last name" />
                   </Col>
                 </Row>
               </Form.Group>
 
               <Form.Group className="mb-5">
                 <Form.Label className="m-3">ZIP Code</Form.Label>
-                <Form.Control className='m-2 input-box' onChange={(text) => setZip(text)} type="text" placeholder="Search for 5 char ZIP Code" />
+                <Form.Control className='m-2 input-box' onChange={(e) => setZip(e.target.value)} type="text" placeholder="Search for 5 char ZIP Code" />
               </Form.Group>
 
               <Form.Group className="mb-5">
                 <Form.Label className="m-3">Phone</Form.Label>
-                <Form.Control className='m-2 input-box' onChange={(text) => setPhone(text)} type="text" placeholder="Search for phone no" />
+                <Form.Control className='m-2 input-box' onChange={(e) => setPhone(e.target.value)} type="text" placeholder="Search for phone no" />
 
               </Form.Group>
 

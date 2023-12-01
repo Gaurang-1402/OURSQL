@@ -7,6 +7,7 @@ import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useSelector } from 'react-redux';
 import DeleteModal from '../components/DeleteModal';
+import sProbationOfficerImage from '../images/s-probation-officer.jpeg';
 
 const ProbationOfficerSearchPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -101,7 +102,7 @@ const ProbationOfficerSearchPage = () => {
                     </Dropdown>
                   </Col>
                   <Col md={8}>
-                    <Form.Control className='m-2' type="text" onChange={(text) => setFirstName} placeholder="Enter first name" />
+                    <Form.Control className='m-2 input-box' type="text" onChange={(e) => setFirstName(e.target.value)} placeholder="Enter first name" />
                   </Col>
                 </Row>
               </Form.Group>
@@ -127,25 +128,29 @@ const ProbationOfficerSearchPage = () => {
                     </Dropdown>
                   </Col>
                   <Col md={8}>
-                    <Form.Control className='m-2 input-box' type="text" onChange={(text) => setLastName(text)} placeholder="Enter last name" />
+                    <Form.Control className='m-2 input-box' type="text" onChange={(e) => {
+                  setLastName(e.target.value)
+                }} placeholder="Enter last name" />
                   </Col>
                 </Row>
               </Form.Group>
 
               <Form.Group className="mb-5">
                 <Form.Label className="m-3">ZIP Code</Form.Label>
-                <Form.Control className='m-2 input-box' onChange={(text) => setZip(text)} type="text" placeholder="Search for 5 char ZIP Code" />
+                <Form.Control className='m-2 input-box' onChange={(e) => {
+                  setZip(e.target.value)
+                }} type="text" placeholder="Search for 5 char ZIP Code" />
               </Form.Group>
 
               <Form.Group className="mb-5">
                 <Form.Label className="m-3">Phone</Form.Label>
-                <Form.Control className='m-2 input-box' onChange={(text) => setPhone(text)} type="text" placeholder="Search for phone no" />
+                <Form.Control className='m-2 input-box' onChange={(e) => setPhone(e.target.value)} type="text" placeholder="Search for phone no" />
 
               </Form.Group>
 
               <Form.Group className="mb-5">
                 <Form.Label className="m-3">Email</Form.Label>
-                <Form.Control className='m-2 input-box' onChange={(text) => setEmail(text)} type="text" placeholder="Search for email" />
+                <Form.Control className='m-2 input-box' onChange={(e) => setEmail(e.target.value)} type="text" placeholder="Search for email" />
 
               </Form.Group>
 
@@ -179,9 +184,9 @@ const ProbationOfficerSearchPage = () => {
               }
             </Form>
           </Col>
-          <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <Col md={3} style={{padding: '20px' }}>
             {/* Placeholder for image */}
-            <img src="path_to_your_image.jpg" alt="Description" style={{ width: '100%' }} />
+            <img src={sProbationOfficerImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>
@@ -219,7 +224,7 @@ const ProbationOfficerSearchPage = () => {
                               <FaEdit />
                             </Button>
                           </Link>
-                          <DeleteModal id={probOfficer.prob_id} entity={"officer"} onDeleteSuccess={handleDeleteSuccess} onDeleteError={handleDeleteError} />
+                          <DeleteModal id={probOfficer.prob_id} entity={"probation-officer"} onDeleteSuccess={handleDeleteSuccess} onDeleteError={handleDeleteError} />
                         </td>
                       )
                     }

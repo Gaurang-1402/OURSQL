@@ -228,9 +228,21 @@ export const getProbationOfficerSearchResults = catchAsync(async (req, res, next
 export const getAppealSearchResults = catchAsync(async (req, res, next) => {
     const { startHearingDate, startFilingDate, selectedStatus } = req.body;
 
-    console.log(startHearingDate, startFilingDate, selectedStatus)
+    console.log(startHearingDate, startFilingDate, selectedStatus);
+    let query = 'SELECT * FROM appeals WHERE 1=1';
 
-    const query = `SELECT * FROM appeals WHERE hearing_date >= '${startHearingDate}' AND filing_date >= '${startFilingDate}' AND status = '${selectedStatus}'`;
+    if (startHearingDate) {
+        query += ` AND hearing_date >= '${startHearingDate}'`;
+    }
+
+    if (startFilingDate) {
+        query += ` AND filing_date >= '${startFilingDate}'`;
+    }
+
+    if (selectedStatus) {
+        query += ` AND status = '${selectedStatus}'`;
+    }
+
     try {
         const results = await db.query(query);
 
@@ -239,17 +251,17 @@ export const getAppealSearchResults = catchAsync(async (req, res, next) => {
             data: {
                 results: results[0]
             }
-        })
+        });
 
     } catch (error) {
 
-        console.log(error)
+        console.log(error);
         res.status(500).json({
             status: 'error',
             message: 'Something went wrong'
-        })
+        });
     }
-})
+});
 
   
 export const getSentenceSearchResults = catchAsync(async (req, res, next) => {

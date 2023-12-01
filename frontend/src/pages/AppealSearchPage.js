@@ -98,7 +98,7 @@ const AppealSearchPage = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               </Form.Group>
-              <Button disabled={Object.keys(selectedStatus).length === 0 || !startHearingDate || !startFilingDate} type="submit" className="m-5" variant="primary">Filter</Button>              {
+              <Button  type="submit" className="m-5" variant="primary">Filter</Button>              {
                 userInfo && userInfo.isAdmin && (
                   <Link variant="secondary" to="/login?redirect=/appeal">
                     <Button variant="secondary">Add new Appeal</Button>
