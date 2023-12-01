@@ -179,9 +179,9 @@ const OfficerSearchPage = () => {
               }
             </Form>
           </Col>
-          <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <Col className='icon-image-parent' md={3} style={{ padding: '20px' }}>
             {/* Placeholder for image */}
-            <img src={sOfficerImage} alt="Description" style={{ width: '100%' }} />
+            <img className='icon-image' src={sOfficerImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>
@@ -197,7 +197,11 @@ const OfficerSearchPage = () => {
                 <th>Badge Number</th>
                 <th>Phone</th>
                 <th>Status</th>
-                <th>Actions</th>
+                {
+                  userInfo && userInfo.isAdmin && (
+                    <th>Actions</th>
+                  )
+                }
               </tr>
             </thead>
             <tbody>
@@ -236,4 +240,3 @@ const OfficerSearchPage = () => {
 }
 
 export default OfficerSearchPage
-

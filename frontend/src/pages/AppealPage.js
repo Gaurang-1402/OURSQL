@@ -10,6 +10,8 @@ import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useSelector } from 'react-redux';
 
+import appealImage from '../images/appeal.jpeg';
+
 const AppealPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -187,9 +189,9 @@ const AppealPage = () => {
               }
             </Form>
           </Col>
-          <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <Col md={4} className='icon-image-parent' style={{ padding: '20px' }}>
             {/* Placeholder for image */}
-            <img src="path_to_your_image.jpg" alt="Description" style={{ width: '100%' }} />
+            <img className='icon-image' src={appealImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>

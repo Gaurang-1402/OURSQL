@@ -6,6 +6,7 @@ import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useSelector } from 'react-redux';
+import crimeChargeImage from '../images/crime-charge.jpeg';
 
 const CrimeChargePage = () => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -200,7 +201,9 @@ const CrimeChargePage = () => {
               <Button type="submit" variant="primary">{isUpdate ? 'Update Crime Charge' : 'Create Crime Charge'}</Button>
             </Form>
           </Col>
-          <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <Col className='icon-image-parent' md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <img className='icon-image' src={crimeChargeImage} alt="Description" style={{ width: '100%' }} />
+
           </Col>
         </Row>
       </div>

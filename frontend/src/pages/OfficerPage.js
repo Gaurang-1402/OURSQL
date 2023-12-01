@@ -6,11 +6,12 @@ import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import officerImage from '../images/officer.jpeg';
 
 const OfficerPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const { id:officerId } = useParams();
+  const { id: officerId } = useParams();
 
   const [officerDetails, setOfficerDetails] = useState({
     last: '',
@@ -81,7 +82,7 @@ const OfficerPage = () => {
       <h1>{officerId ? 'Edit Officer' : 'Add Officer'}</h1>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col md={6}>
+          <Col md={7}>
             <Form.Group className="mb-3">
               <Form.Label>Last Name</Form.Label>
               <Form.Control
@@ -90,10 +91,9 @@ const OfficerPage = () => {
                 value={officerDetails.last}
                 onChange={handleChange}
                 placeholder="Enter Last Name"
+                className='input-box'
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>First Name</Form.Label>
               <Form.Control
@@ -102,10 +102,10 @@ const OfficerPage = () => {
                 value={officerDetails.first}
                 onChange={handleChange}
                 placeholder="Enter First Name"
+                className='input-box'
+
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Precinct</Form.Label>
               <Form.Control
@@ -114,10 +114,10 @@ const OfficerPage = () => {
                 value={officerDetails.precinct}
                 onChange={handleChange}
                 placeholder="Enter Precinct"
+                className='input-box'
+
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Badge Number</Form.Label>
               <Form.Control
@@ -126,10 +126,10 @@ const OfficerPage = () => {
                 value={officerDetails.badge}
                 onChange={handleChange}
                 placeholder="Enter Badge Number"
+                className='input-box'
+
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
@@ -138,26 +138,34 @@ const OfficerPage = () => {
                 value={officerDetails.phone}
                 onChange={handleChange}
                 placeholder="Enter Phone Number"
+                className='input-box'
+
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Status</Form.Label>
               <Form.Select
                 name="status"
                 value={officerDetails.status}
                 onChange={handleChange}
+                className='input-box mb-5'
+
               >
                 <option value="A">Active</option>
                 <option value="I">Inactive</option>
               </Form.Select>
             </Form.Group>
           </Col>
+          
+        <Col className='icon-image-parent' md={4}>
+          <img className='icon-image' src={officerImage} alt="Description" style={{ width: '100%' }} />
+
+        </Col>
         </Row>
         <Button variant="primary" type="submit">
           {officerId ? 'Update Officer' : 'Add Officer'}
         </Button>
+
       </Form>
     </>
   ) : (

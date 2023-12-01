@@ -184,9 +184,9 @@ const ProbationOfficerSearchPage = () => {
               }
             </Form>
           </Col>
-          <Col md={3} style={{padding: '20px' }}>
+          <Col md={3} className='icon-image-parent' style={{padding: '20px' }}>
             {/* Placeholder for image */}
-            <img src={sProbationOfficerImage} alt="Description" style={{ width: '100%' }} />
+            <img src={sProbationOfficerImage} className='icon-image' alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>

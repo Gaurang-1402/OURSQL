@@ -7,6 +7,8 @@ import { BASE_URL } from '../constants';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
+import sCriminalImage from '../images/s-criminal.jpg';
+
 const CriminalPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -34,7 +36,6 @@ const CriminalPage = () => {
           withCredentials: true
         });
         const criminal = response.data.data.data[0];
-        console.log(criminal);
 
         setIsUpdate(true);
         setCriminalDetails({
@@ -84,7 +85,7 @@ const CriminalPage = () => {
       <h1>{criminalId ? 'Edit Criminal' : 'Add Criminal'}</h1>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col md={6}>
+          <Col md={7}>
             <Form.Group className="mb-3">
               <Form.Label>Last Name</Form.Label>
               <Form.Control
@@ -93,10 +94,9 @@ const CriminalPage = () => {
                 value={criminalDetails.last}
                 onChange={handleChange}
                 placeholder="Enter Last Name"
+                className='input-box'
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>First Name</Form.Label>
               <Form.Control
@@ -105,10 +105,10 @@ const CriminalPage = () => {
                 value={criminalDetails.first}
                 onChange={handleChange}
                 placeholder="Enter First Name"
+                className='input-box'
+
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Zip</Form.Label>
               <Form.Control
@@ -117,10 +117,10 @@ const CriminalPage = () => {
                 value={criminalDetails.zip}
                 onChange={handleChange}
                 placeholder="Enter Zip Code"
+                className='input-box'
+
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
@@ -129,34 +129,40 @@ const CriminalPage = () => {
                 value={criminalDetails.phone}
                 onChange={handleChange}
                 placeholder="Enter Phone Number"
+                className='input-box'
+
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Status</Form.Label>
               <Form.Select
                 name="status"
                 value={criminalDetails.v_status}
                 onChange={handleChange}
+                className='input-box'
+
+              >
+                <option value="Y">Yes</option>
+                <option value="N">No</option>
+              </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-5">
+              <Form.Label>Status</Form.Label>
+              <Form.Select
+                name="status"
+                value={criminalDetails.p_status}
+                onChange={handleChange}
+                className='input-box'
+
               >
                 <option value="Y">Yes</option>
                 <option value="N">No</option>
               </Form.Select>
             </Form.Group>
           </Col>
-          <Col md={6}>
-            <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label>
-              <Form.Select
-                name="status"
-                value={criminalDetails.p_status}
-                onChange={handleChange}
-              >
-                <option value="Y">Yes</option>
-                <option value="N">No</option>
-              </Form.Select>
-            </Form.Group>
+          <Col className='icon-image-parent' md={3} style={{ padding: '20px' }}>
+            {/* Placeholder for additional content or images */}
+            <img className='icon-image' src={sCriminalImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
         <Button variant="primary" type="submit">

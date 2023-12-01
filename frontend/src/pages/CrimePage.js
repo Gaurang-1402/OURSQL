@@ -7,6 +7,8 @@ import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useSelector } from 'react-redux';
 
+import crimeImage from '../images/crime.jpeg';
+
 const CrimePage = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -114,7 +116,7 @@ const CrimePage = () => {
       <h1>{isUpdate ? 'Update Crime' : 'Create Crime'}</h1>
       <div className="App" style={{ marginTop: '15vh' }}>
         <Row>
-          <Col md={9}>
+          <Col md={7}>
             <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-5">
                 <Dropdown>
@@ -189,7 +191,9 @@ const CrimePage = () => {
               <Button type="submit" variant="primary">{isUpdate ? 'Update Crime' : 'Create Crime'}</Button>
             </Form>
           </Col>
-          <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <Col className='icon-image-parent' md={3} style={{ padding: '20px' }}>
+            {/* Placeholder for additional content or images */}
+            <img className='icon-image' src={crimeImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>

@@ -191,16 +191,16 @@ const CriminalSearchPage = () => {
               <Button type="submit" className="m-5" variant="primary">Filter</Button>              {
 
                 userInfo && userInfo.isAdmin && (
-                  <Link variant="secondary" to="/login?redirect=/probation-officer">
+                  <Link variant="secondary" to="/login?redirect=/criminal">
                     <Button variant="secondary">Add new Criminal</Button>
                   </Link>
                 )
               }
             </Form>
           </Col>
-          <Col md={3} style={{ border: '1px solid #ddd', padding: '20px' }}>
+          <Col className='icon-image-parent' md={4} style={{ padding: '20px' }}>
             {/* Placeholder for image */}
-            <img src={criminalImage} alt="Description" style={{ width: '100%' }} />
+            <img className='icon-image' src={criminalImage} alt="Description" style={{ width: '100%' }} />
           </Col>
         </Row>
       </div>
@@ -216,7 +216,11 @@ const CriminalSearchPage = () => {
                 <th>Phone</th>
                 <th>Violent Offender Status</th>
                 <th>Parole Status</th>
-                <th>Actions</th>
+                {
+                  userInfo && userInfo.isAdmin && (
+                    <th>Actions</th>
+                  )
+                }
               </tr>
             </thead>
             <tbody>

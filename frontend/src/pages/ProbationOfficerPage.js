@@ -6,11 +6,12 @@ import axios from 'axios';
 import { BASE_URL } from '../constants';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import probOfficerImage from '../images/probation-officer.jpeg';
 
 const ProbationOfficerPage = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  const { id:probOfficerId } = useParams();
+  const { id: probOfficerId } = useParams();
 
   const [probOfficerDetails, setProbOfficerDetails] = useState({
     last: '',
@@ -84,7 +85,7 @@ const ProbationOfficerPage = () => {
       <h1>{probOfficerId ? 'Edit Probation Officer' : 'Add Probation Officer'}</h1>
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col md={6}>
+          <Col md={7}>
             <Form.Group className="mb-3">
               <Form.Label>Last Name</Form.Label>
               <Form.Control
@@ -93,10 +94,9 @@ const ProbationOfficerPage = () => {
                 value={probOfficerDetails.last}
                 onChange={handleChange}
                 placeholder="Enter Last Name"
+                className='input-box'
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>First Name</Form.Label>
               <Form.Control
@@ -105,10 +105,9 @@ const ProbationOfficerPage = () => {
                 value={probOfficerDetails.first}
                 onChange={handleChange}
                 placeholder="Enter First Name"
+                className='input-box'
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Zip</Form.Label>
               <Form.Control
@@ -117,10 +116,10 @@ const ProbationOfficerPage = () => {
                 value={probOfficerDetails.zip}
                 onChange={handleChange}
                 placeholder="Enter Zip Code"
+                className='input-box'
+
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
@@ -129,10 +128,10 @@ const ProbationOfficerPage = () => {
                 value={probOfficerDetails.phone}
                 onChange={handleChange}
                 placeholder="Enter Phone Number"
+                className='input-box'
+
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
               <Form.Control
@@ -141,22 +140,29 @@ const ProbationOfficerPage = () => {
                 value={probOfficerDetails.email}
                 onChange={handleChange}
                 placeholder="Enter Email"
+                className='input-box'
+
               />
             </Form.Group>
-          </Col>
-          <Col md={6}>
             <Form.Group className="mb-3">
               <Form.Label>Status</Form.Label>
               <Form.Select
                 name="status"
                 value={probOfficerDetails.status}
                 onChange={handleChange}
+                className='input-box mb-5'
+
               >
                 <option value="A">Active</option>
                 <option value="I">Inactive</option>
               </Form.Select>
             </Form.Group>
           </Col>
+          <Col md={4} className='icon-image-parent' style={{ padding: '20px' }}>
+            <img className='icon-image' src={probOfficerImage} alt="Description" style={{ width: '100%' }} />
+
+          </Col>
+
         </Row>
         <Button variant="primary" type="submit">
           {probOfficerId ? 'Update Probation Officer' : 'Add Probation Officer'}
