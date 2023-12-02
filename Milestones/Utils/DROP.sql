@@ -8,4 +8,3 @@ DROP TABLE IF EXISTS prob_officer;
 DROP TABLE IF EXISTS crimes;
 DROP TABLE IF EXISTS alias;
 DROP TABLE IF EXISTS criminals;
-DROP PROCEDURE IF EXISTS pof_search_proc;
