@@ -216,6 +216,7 @@ const CriminalSearchPage = () => {
                 <th>Phone</th>
                 <th>Violent Offender Status</th>
                 <th>Parole Status</th>
+                <th>Alias</th>
                 {
                   userInfo && userInfo.isAdmin && (
                     <th>Actions</th>
@@ -234,6 +235,7 @@ const CriminalSearchPage = () => {
                     <td>{criminal.phone}</td>
                     <td>{criminal.v_status}</td>
                     <td>{criminal.p_status}</td>
+                    <td>{criminal.alias}</td>
                     {
                       userInfo && userInfo.isAdmin && (
                         <td>
