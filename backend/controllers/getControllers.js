@@ -7,10 +7,13 @@ export const getCrimeIDs = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
+            await dbAdmin.query('COMMIT;');
         } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
         res.status(200).json({
             status: 'success',
@@ -35,10 +38,13 @@ export const getCrime = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
+            await dbAdmin.query('COMMIT;');
         } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
         res.status(200).json({
             status: 'success',
@@ -62,10 +68,13 @@ export const getSentence = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
+            await dbAdmin.query('COMMIT;');
         } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
         res.status(200).json({
             status: 'success',
@@ -90,10 +99,13 @@ export const getCriminalIDs = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
+            await dbAdmin.query('COMMIT;');
         } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
         res.status(200).json({
             status: 'success',
@@ -118,10 +130,13 @@ export const getCriminal = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
+            await dbAdmin.query('COMMIT;');
         } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
         res.status(200).json({
             status: 'success',
@@ -145,10 +160,13 @@ export const getOfficer = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
+            await dbAdmin.query('COMMIT;');
         } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
 
         res.status(200).json({
@@ -173,10 +191,13 @@ export const getCrimeCodeIDs = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
+            await dbAdmin.query('COMMIT;');
         } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
         res.status(200).json({
             status: 'success',
@@ -201,10 +222,13 @@ export const getProbationOfficer = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
+            await dbAdmin.query('COMMIT;');
         } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
 
         res.status(200).json({
@@ -230,10 +254,13 @@ export const getProbationOfficerIDs = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
+            await dbAdmin.query('COMMIT;');
         } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
         res.status(200).json({
             status: 'success',
@@ -261,12 +288,14 @@ export const getAppeal = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
-        } else{
+            await dbAdmin.query('COMMIT;');
+        } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
-
         res.status(200).json({
             status: 'success',
             data: {
@@ -290,10 +319,13 @@ export const getCrimeCharge = catchAsync(async (req, res, next) => {
     try {
         let result;
         if (req.user && req.user.is_admin === 'Y') {
+            await dbAdmin.query('START TRANSACTION;');
             result = await dbAdmin.query(query);
-
+            await dbAdmin.query('COMMIT;');
         } else {
+            await dbNonAdmin.query('START TRANSACTION;');
             result = await dbNonAdmin.query(query);
+            await dbNonAdmin.query('COMMIT;');
         }
 
 

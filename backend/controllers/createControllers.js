@@ -6,15 +6,16 @@ export const createCrime = catchAsync(async (req, res, next) => {
     const { criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date } = req.body;
     const newId = Math.floor(Math.random() * 1000000000);
 
-    console.log(criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date);
 
 
     let query = `INSERT INTO crimes (criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date )
             VALUES (${newId}, ${criminal_id}, ${classification}, '${date_charged}', ${status},
                     ${hearing_date}, ${appeal_cut_date})`;
     try {
+        await dbAdmin.query('START TRANSACTION;');
+        const results = await dbAdmin.query(query);
+        await dbAdmin.query('COMMIT;');
         
-        const result = await dbAdmin.query(query);
         res.status(200).json({
             message: 'Created crime successfully',
         });
@@ -39,7 +40,10 @@ export const createSentence = catchAsync(async (req, res, next) => {
 
     const query = `INSERT INTO sentences (sentence_id, criminal_id, type, prob_id, start_date, end_date, violations) VALUES (${newId}, ${criminal_id}, '${type}', ${prob_id}, '${start_date}', '${end_date}', ${violations})`;
     try {
-        const result = await dbAdmin.query(query);
+        await dbAdmin.query('START TRANSACTION;');
+        const results = await dbAdmin.query(query);
+        await dbAdmin.query('COMMIT;');
+        
         res.status(200).json({
             message: 'Created sentence successfully',
         });
@@ -79,7 +83,10 @@ export const createProbationOfficer = catchAsync(async (req, res, next) => {
 
     const query = `INSERT INTO prob_officer (prob_id, last, first, zip, phone, email, status) VALUES (${newId}, '${last}', '${first}', '${zip}', '${phone}', '${email}', '${status}')`;
     try {
-        const result = await dbAdmin.query(query);
+        await dbAdmin.query('START TRANSACTION;');
+        const results = await dbAdmin.query(query);
+        await dbAdmin.query('COMMIT;');
+
         res.status(200).json({
             message: 'Created probation officer successfully',
         });
@@ -102,7 +109,10 @@ export const createAppeal = catchAsync(async (req, res, next) => {
 
     const query = `INSERT INTO appeals (appeal_id, crime_id, filing_date, hearing_date, status) VALUES (${newId}, ${selectedCrimeID}, '${startFilingDate}', '${startHearingDate}', '${selectedStatus}')`;
     try {
-        const result = await dbAdmin.query(query);
+        await dbAdmin.query('START TRANSACTION;');
+        const results = await dbAdmin.query(query);
+        await dbAdmin.query('COMMIT;');
+
         res.status(200).json({
             message: 'Created appeal successfully',
         });
@@ -125,7 +135,10 @@ export const createCriminal = catchAsync(async (req, res, next) => {
 
     const query = `INSERT INTO criminal (criminal_id, last, first, zip, phone, v_status, p_status) VALUES (${newId}, '${last}', '${first}', '${zip}', '${phone}', '${v_status}', '${p_status}')`;
     try {
-        const result = await dbAdmin.query(query);
+        await dbAdmin.query('START TRANSACTION;');
+        const results = await dbAdmin.query(query);
+        await dbAdmin.query('COMMIT;');
+
         res.status(200).json({
             message: 'Created criminal successfully',
         });
@@ -148,11 +161,12 @@ export const createCrimeCharge = catchAsync(async (req, res, next) => {
     const courtFeeFloat = parseFloat(court_fee).toFixed(2);
     const amountPaidFloat = parseFloat(amount_paid).toFixed(2);
     
-    console.log(newId, crime_id, crime_code, charge_status, fineAmountFloat, courtFeeFloat, amountPaidFloat, payment_due_date);
-
     let query = `INSERT INTO crime_charges (charge_id, crime_id, crime_code, charge_status, fine_amount, court_fee, amount_paid, payment_due_date) VALUES (${newId}, ${crime_id}, ${crime_code}, '${charge_status}', ${fineAmountFloat}, ${courtFeeFloat}, ${amountPaidFloat}, '${payment_due_date}')`;
     try {
-        const result = await dbAdmin.query(query);
+        await dbAdmin.query('START TRANSACTION;');
+        const results = await dbAdmin.query(query);
+        await dbAdmin.query('COMMIT;');
+        
         res.status(200).json({
             message: 'Created crime charge successfully',
         });

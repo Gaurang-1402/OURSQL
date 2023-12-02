@@ -6,9 +6,11 @@ export const deleteCrime = catchAsync(async (req, res, next) => {
 
     try {
         // First, delete related records in crime_charges, appeals, crime_officers
+        await dbAdmin.query('START TRANSACTION;');
+
         const deleteChargesQuery = `DELETE FROM crime_charges WHERE crime_id = ${crimeId}`;
         await dbAdmin.query(deleteChargesQuery);
-        
+
         const deleteAppealsQuery = `DELETE FROM appeals WHERE crime_id = ${crimeId}`;
         await dbAdmin.query(deleteAppealsQuery);
 
@@ -18,6 +20,9 @@ export const deleteCrime = catchAsync(async (req, res, next) => {
         // Then, delete the crime
         const deleteCrimeQuery = `DELETE FROM crimes WHERE crime_id = ${crimeId}`;
         const result = await dbAdmin.query(deleteCrimeQuery);
+
+        await dbAdmin.query('COMMIT;');
+
 
         if (result.rowCount === 0) {
             return res.status(404).json({
@@ -44,12 +49,15 @@ export const deleteCriminal = catchAsync(async (req, res, next) => {
 
     try {
         // First, delete related records in sentences
+        await dbAdmin.query('START TRANSACTION;');
+
         const deleteSentencesQuery = `DELETE FROM sentences WHERE criminal_id = ${criminalId}`;
         await dbAdmin.query(deleteSentencesQuery);
 
         // Then, delete the criminal
         const deleteCriminalsQuery = `DELETE FROM criminals WHERE criminal_id = ${criminalId}`;
         const result = await dbAdmin.query(deleteCriminalsQuery);
+        await dbAdmin.query('COMMIT;');
 
         if (result.rowCount === 0) {
             return res.status(404).json({
@@ -76,12 +84,15 @@ export const deleteOfficer = catchAsync(async (req, res, next) => {
 
     try {
         // First, delete related records in crime_officers
+        await dbAdmin.query('START TRANSACTION;');
+
         const deleteCrimeOfficersQuery = `DELETE FROM crime_officers WHERE officer_id = ${officerID}`;
         await dbAdmin.query(deleteCrimeOfficersQuery);
 
         // Then, delete the officer
         const deleteOfficerQuery = `DELETE FROM officers WHERE officer_id = ${officerID}`;
         const result = await dbAdmin.query(deleteOfficerQuery);
+        await dbAdmin.query('COMMIT;');
 
         if (result.rowCount === 0) {
             return res.status(404).json({
@@ -108,12 +119,15 @@ export const deleteProbationOfficer = catchAsync(async (req, res, next) => {
 
     try {
         // First, delete related records in sentences
+        await dbAdmin.query('START TRANSACTION;');
+
         const deleteSentencesQuery = `DELETE FROM sentences WHERE prob_id = ${probOfficerID}`;
         await dbAdmin.query(deleteSentencesQuery);
 
         // Then, delete the officer
         const deleteProbOfficerQuery = `DELETE FROM prob_officer WHERE prob_id = ${probOfficerID}`;
         const result = await dbAdmin.query(deleteProbOfficerQuery);
+        await dbAdmin.query('COMMIT;');
 
         if (result.rowCount === 0) {
             return res.status(404).json({
@@ -136,12 +150,17 @@ export const deleteProbationOfficer = catchAsync(async (req, res, next) => {
 
 export const deleteAppeal = catchAsync(async (req, res, next) => {
     const appealID = req.params.id;
+
     const query = `DELETE FROM appeals WHERE appeal_id = ${appealID}`;
     try {
+        await dbAdmin.query('START TRANSACTION;');
+
         const result = await dbAdmin.query(query);
         res.status(200).json({
             message: 'Success, appeal deleted'
         });
+        await dbAdmin.query('COMMIT;');
+
     }
     catch (error) {
         console.log(error);
@@ -155,9 +174,13 @@ export const deleteSentence = catchAsync(async (req, res, next) => {
     const sentenceID = req.params.id;
 
     try {
+        await dbAdmin.query('START TRANSACTION;');
+
         // Delete the sentence
         const deleteSentenceQuery = `DELETE FROM sentences WHERE sentence_id = ${sentenceID}`;
         const result = await dbAdmin.query(deleteSentenceQuery);
+
+        await dbAdmin.query('COMMIT;');
 
         if (result.rowCount === 0) {
             return res.status(404).json({
@@ -182,9 +205,12 @@ export const deleteCrimeCharge = catchAsync(async (req, res, next) => {
     const chargeID = req.params.id;
 
     try {
+        await dbAdmin.query('START TRANSACTION;');
+
         // Delete the crime charge
         const deleteCrimeChargeQuery = `DELETE FROM crime_charges WHERE charge_id = ${chargeID}`;
         const result = await dbAdmin.query(deleteCrimeChargeQuery);
+        await dbAdmin.query('COMMIT;');
 
         if (result.rowCount === 0) {
             return res.status(404).json({
