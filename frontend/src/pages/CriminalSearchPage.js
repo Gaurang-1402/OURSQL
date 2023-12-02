@@ -187,8 +187,8 @@ const CriminalSearchPage = () => {
                 </Dropdown>
               </Form.Group>
 
-              {/* <Button disabled={Object.keys(selectedLastNameFilter).length === 0 || !firstName || !lastName} type="submit" className="m-5" variant="primary">Filter</Button>              { */}
-              <Button type="submit" className="m-5" variant="primary">Filter</Button>              {
+              {/* <Button disabled={Object.keys(selectedLastNameFilter).length === 0 || !firstName || !lastName} type="submit" className="m-5" variant="primary">Search</Button>              { */}
+              <Button type="submit" className="m-5" variant="primary">Search</Button>              {
 
                 userInfo && userInfo.isAdmin && (
                   <Link variant="secondary" to="/login?redirect=/criminal">
@@ -221,18 +221,13 @@ const CriminalSearchPage = () => {
                     <th>Actions</th>
                   )
                 }
-                {
-                  userInfo && userInfo.isAdmin && (
-                    <th>Actions</th>
-                  )
-                }
               </tr>
             </thead>
             <tbody>
               {
                 criminals.map((criminal) => (
-                  <tr key={criminal.prob_id}>
-                    <td>{criminal.prob_id}</td>
+                  <tr key={criminal.criminal_id}>
+                    <td>{criminal.criminal_id}</td>
                     <td>{criminal.last}</td>
                     <td>{criminal.first}</td>
                     <td>{criminal.zip}</td>

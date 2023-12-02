@@ -16,7 +16,7 @@ const SentenceSearchPage = () => {
   const [sentenceType, setSentenceType] = useState('');
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [violations, setViolations] = useState('1');
+  const [violations, setViolations] = useState('');
 
   const [sentences, setSentences] = useState([]); // [{}]
 

@@ -83,7 +83,6 @@ const OfficerPage = () => {
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={7}>
-          <Col md={7}>
             <Form.Group className="mb-3">
               <Form.Label>Last Name</Form.Label>
               <Form.Control

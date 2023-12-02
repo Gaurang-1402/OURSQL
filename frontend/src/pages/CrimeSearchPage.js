@@ -86,7 +86,7 @@ const CrimeSearchPage = () => {
               {/* Form fields */}
               <Form.Group className="mb-5">
                 <Dropdown>
-                  <Form.Label className="m-3">Crime IDs</Form.Label>
+                  <Form.Label className="m-3">Criminal IDs</Form.Label>
 
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
 

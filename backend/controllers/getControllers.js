@@ -1,11 +1,17 @@
 import catchAsync from "../utils/catchAsync.js";
-import {dbAdmin} from '../config/db.js';
+import { dbAdmin, dbNonAdmin } from '../config/db.js';
 
 
 export const getCrimeIDs = catchAsync(async (req, res, next) => {
     const query = 'SELECT * FROM crimes';
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else {
+            result = await dbNonAdmin.query(query);
+        }
         res.status(200).json({
             status: 'success',
             data: {
@@ -27,7 +33,13 @@ export const getCrime = catchAsync(async (req, res, next) => {
     const crimeId = req.params.id;
     const query = `SELECT * FROM crimes WHERE crime_id = ${crimeId}`;
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else {
+            result = await dbNonAdmin.query(query);
+        }
         res.status(200).json({
             status: 'success',
             data: {
@@ -48,7 +60,13 @@ export const getSentence = catchAsync(async (req, res, next) => {
     const sentenceId = req.params.id;
     const query = `SELECT * FROM sentences WHERE sentence_id = ${sentenceId}`;
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else {
+            result = await dbNonAdmin.query(query);
+        }
         res.status(200).json({
             status: 'success',
             data: {
@@ -70,7 +88,13 @@ export const getCriminalIDs = catchAsync(async (req, res, next) => {
     // return all criminal IDs
     const query = 'SELECT * FROM criminals';
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else {
+            result = await dbNonAdmin.query(query);
+        }
         res.status(200).json({
             status: 'success',
             data: {
@@ -92,7 +116,13 @@ export const getCriminal = catchAsync(async (req, res, next) => {
     const criminalId = req.params.id;
     const query = `SELECT * FROM criminals WHERE criminal_id = ${criminalId}`;
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else {
+            result = await dbNonAdmin.query(query);
+        }
         res.status(200).json({
             status: 'success',
             data: {
@@ -113,7 +143,14 @@ export const getOfficer = catchAsync(async (req, res, next) => {
     const officerId = req.params.id;
     const query = `SELECT * FROM officers WHERE officer_id = ${officerId}`;
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else {
+            result = await dbNonAdmin.query(query);
+        }
+
         res.status(200).json({
             status: 'success',
             data: {
@@ -134,7 +171,13 @@ export const getCrimeCodeIDs = catchAsync(async (req, res, next) => {
     // return all crime code IDs
     const query = 'SELECT * FROM crime_codes';
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else {
+            result = await dbNonAdmin.query(query);
+        }
         res.status(200).json({
             status: 'success',
             data: {
@@ -156,7 +199,14 @@ export const getProbationOfficer = catchAsync(async (req, res, next) => {
     const probOfficerId = req.params.id;
     const query = `SELECT * FROM prob_officer WHERE prob_id = ${probOfficerId}`;
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else {
+            result = await dbNonAdmin.query(query);
+        }
+
         res.status(200).json({
             status: 'success',
             data: {
@@ -178,7 +228,13 @@ export const getProbationOfficerIDs = catchAsync(async (req, res, next) => {
     // return all probation officer IDs
     const query = 'SELECT * FROM prob_officer';
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else {
+            result = await dbNonAdmin.query(query);
+        }
         res.status(200).json({
             status: 'success',
             data: {
@@ -203,7 +259,14 @@ export const getAppeal = catchAsync(async (req, res, next) => {
     const appealId = req.params.id;
     const query = `SELECT * FROM appeals WHERE appeal_id = ${appealId}`;
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else{
+            result = await dbNonAdmin.query(query);
+        }
+
         res.status(200).json({
             status: 'success',
             data: {
@@ -225,7 +288,15 @@ export const getCrimeCharge = catchAsync(async (req, res, next) => {
     const chargeId = req.params.id;
     const query = `SELECT * FROM crime_charges WHERE charge_id = ${chargeId}`;
     try {
-        const result = await dbAdmin.query(query);
+        let result;
+        if (req.user && req.user.is_admin === 'Y') {
+            result = await dbAdmin.query(query);
+
+        } else {
+            result = await dbNonAdmin.query(query);
+        }
+
+
         res.status(200).json({
             status: 'success',
             data: {

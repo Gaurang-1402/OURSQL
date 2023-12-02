@@ -173,8 +173,8 @@ const ProbationOfficerSearchPage = () => {
                 </Dropdown>
               </Form.Group>
 
-              {/* <Button disabled={Object.keys(selectedLastNameFilter).length === 0 || !firstName || !lastName} type="submit" className="m-5" variant="primary">Filter</Button>              { */}
-              <Button type="submit" className="m-5" variant="primary">Filter</Button>              {
+              {/* <Button disabled={Object.keys(selectedLastNameFilter).length === 0 || !firstName || !lastName} type="submit" className="m-5" variant="primary">Search</Button>              { */}
+              <Button type="submit" className="m-5" variant="primary">Search</Button>              {
 
                 userInfo && userInfo.isAdmin && (
                   <Link variant="secondary" to="/login?redirect=/probation-officer">
@@ -195,7 +195,7 @@ const ProbationOfficerSearchPage = () => {
           <Table striped hover responsive className='table-sm'>
             <thead>
               <tr>
-                <th>Officer ID</th>
+                <th>Probation Officer ID</th>
                 <th>Last Name</th>
                 <th>First Name</th>
                 <th>Zip</th>

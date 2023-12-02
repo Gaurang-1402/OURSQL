@@ -22,7 +22,7 @@ CREATE TABLE alias(
     alias_id NUMERIC(6),
     criminal_id NUMERIC(6),
     alias VARCHAR(20) DEFAULT 'N',
-    PRIMARY KEY (alias),
+    PRIMARY KEY (alias_id),
     FOREIGN KEY (criminal_id) REFERENCES criminals(criminal_id)
 );
 

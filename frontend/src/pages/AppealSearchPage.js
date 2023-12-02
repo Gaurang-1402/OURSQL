@@ -21,8 +21,8 @@ const AppealSearchPage = () => {
     { id: 3, label: 'D (Disapproved)', value: 'D' },
   ]);
 
-  const [startHearingDate, setHearingStartDate] = useState(new Date('2022-04-25'));
-  const [startFilingDate, setFilingStartDate] = useState(new Date('2022-04-25'));
+  const [startHearingDate, setHearingStartDate] = useState(null);
+  const [startFilingDate, setFilingStartDate] = useState(null);
   const [selectedStatus, setSelectedStatus] = useState({});
 
   const [appeals, setAppeals] = useState([]); // [{}]
@@ -99,7 +99,7 @@ const AppealSearchPage = () => {
                   </Dropdown.Menu>
                 </Dropdown>
               </Form.Group>
-              <Button  type="submit" className="m-5" variant="primary">Filter</Button>              {
+              <Button  type="submit" className="m-5" variant="primary">Search</Button>              {
                 userInfo && userInfo.isAdmin && (
                   <Link variant="secondary" to="/login?redirect=/appeal">
                     <Button variant="secondary">Add new Appeal</Button>
@@ -122,10 +122,11 @@ const AppealSearchPage = () => {
 
             <thead>
               <tr>
-                <th>CRIME_ID</th>
-                <th>STATUS</th>
-                <th>FILING DATE</th>
-                <th>HEARING DATE</th>
+                <th>Appeal ID</th>
+                <th>Crime ID</th>
+                <th>Status</th>
+                <th>Filing Date</th>
+                <th>Hearing Date</th>
                 {
                   userInfo && userInfo.isAdmin && (
                     <th>Actions</th>
@@ -137,6 +138,7 @@ const AppealSearchPage = () => {
               {
                 appeals.map((appeal) => (
                   <tr key={appeal.appeal_id}>
+                    <td>{appeal.appeal_id}</td>
                     <td>{appeal.crime_id}</td>
                     <td>{appeal.status}</td>
                     <td>{appeal.filing_date}</td>

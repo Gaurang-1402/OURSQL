@@ -168,8 +168,8 @@ const OfficerSearchPage = () => {
                 </Dropdown>
               </Form.Group>
 
-              {/* <Button disabled={Object.keys(selectedLastNameFilter).length === 0 || !firstName || !lastName} type="submit" className="m-5" variant="primary">Filter</Button>              { */}
-              <Button type="submit" className="m-5" variant="primary">Filter</Button>              {
+              {/* <Button disabled={Object.keys(selectedLastNameFilter).length === 0 || !firstName || !lastName} type="submit" className="m-5" variant="primary">Search</Button>              { */}
+              <Button type="submit" className="m-5" variant="primary">Search</Button>              {
 
                 userInfo && userInfo.isAdmin && (
                   <Link variant="secondary" to="/login?redirect=/officer">

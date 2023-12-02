@@ -35,12 +35,12 @@ export const getCrimeSearchResults = catchAsync(async (req, res, next) => {
     
 
     try {
+        let results;
         if (req.user && req.user.is_admin === 'Y') {
-            const results = await dbAdmin.query(query);
+            results = await dbAdmin.query(query);
 
         } else{
-            const results = await dbNonAdmin.query(query);
-
+            results = await dbNonAdmin.query(query);
         }
 
         res.status(200).json({
@@ -100,12 +100,12 @@ export const getCriminalSearchResults = catchAsync(async (req, res, next) => {
     }
 
     try {
+        let results;
         if (req.user && req.user.is_admin === 'Y') {
-            const results = await dbAdmin.query(query);
+            results = await dbAdmin.query(query);
 
         } else{
-            const results = await dbNonAdmin.query(query);
-
+            results = await dbNonAdmin.query(query);
         }
 
         res.status(200).json({
@@ -163,12 +163,12 @@ export const getOfficerSearchResults = catchAsync(async (req, res, next) => {
     }
 
     try {
+        let results;
         if (req.user && req.user.is_admin === 'Y') {
-            const results = await dbAdmin.query(query);
+            results = await dbAdmin.query(query);
 
         } else{
-            const results = await dbNonAdmin.query(query);
-
+            results = await dbNonAdmin.query(query);
         }
 
         res.status(200).json({
@@ -225,13 +225,14 @@ export const getProbationOfficerSearchResults = catchAsync(async (req, res, next
     }
 
     try {
+        let results;
         if (req.user && req.user.is_admin === 'Y') {
-            const results = await dbAdmin.query(query);
+            results = await dbAdmin.query(query);
 
         } else{
-            const results = await dbNonAdmin.query(query);
-
+            results = await dbNonAdmin.query(query);
         }
+
         res.status(200).json({
             data: {
                 results: results[0]
@@ -269,16 +270,15 @@ export const getAppealSearchResults = catchAsync(async (req, res, next) => {
     }
 
     try {
+        let results;
         if (req.user && req.user.is_admin === 'Y') {
-            const results = await dbAdmin.query(query);
+            results = await dbAdmin.query(query);
 
         } else{
-            const results = await dbNonAdmin.query(query);
-
+            results = await dbNonAdmin.query(query);
         }
 
         res.status(200).json({
-            status: 'success',
             data: {
                 results: results[0]
             }
@@ -318,13 +318,14 @@ export const getSentenceSearchResults = catchAsync(async (req, res, next) => {
     }
 
     try {
+        let results;
         if (req.user && req.user.is_admin === 'Y') {
-            const results = await dbAdmin.query(query);
+            results = await dbAdmin.query(query);
 
         } else{
-            const results = await dbNonAdmin.query(query);
-
+            results = await dbNonAdmin.query(query);
         }
+
         res.status(200).json({
             data: {
                 results: results[0]
@@ -371,14 +372,14 @@ export const getCrimeChargeSearchResults = catchAsync(async (req, res, next) => 
     }
 
     try {
+        let results;
         if (req.user && req.user.is_admin === 'Y') {
-            const results = await dbAdmin.query(query);
+            results = await dbAdmin.query(query);
 
         } else{
-            const results = await dbNonAdmin.query(query);
-
+            results = await dbNonAdmin.query(query);
         }
-        
+
         res.status(200).json({
             data: {
                 results: results[0]
