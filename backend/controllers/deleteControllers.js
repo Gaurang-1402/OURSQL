@@ -1,5 +1,5 @@
 import catchAsync from "../utils/catchAsync.js";
-import db from '../config/db.js';
+import {dbAdmin} from '../config/db.js';
 
 export const deleteCrime = catchAsync(async (req, res, next) => {
     const crimeId = req.params.id;
@@ -7,17 +7,17 @@ export const deleteCrime = catchAsync(async (req, res, next) => {
     try {
         // First, delete related records in crime_charges, appeals, crime_officers
         const deleteChargesQuery = `DELETE FROM crime_charges WHERE crime_id = ${crimeId}`;
-        await db.query(deleteChargesQuery);
+        await dbAdmin.query(deleteChargesQuery);
         
         const deleteAppealsQuery = `DELETE FROM appeals WHERE crime_id = ${crimeId}`;
-        await db.query(deleteAppealsQuery);
+        await dbAdmin.query(deleteAppealsQuery);
 
         const deleteCrimeOfficersQuery = `DELETE FROM crime_officers WHERE crime_id = ${crimeId}`;
-        await db.query(deleteCrimeOfficersQuery);
+        await dbAdmin.query(deleteCrimeOfficersQuery);
 
         // Then, delete the crime
         const deleteCrimeQuery = `DELETE FROM crimes WHERE crime_id = ${crimeId}`;
-        const result = await db.query(deleteCrimeQuery);
+        const result = await dbAdmin.query(deleteCrimeQuery);
 
         if (result.rowCount === 0) {
             return res.status(404).json({
@@ -45,11 +45,11 @@ export const deleteCriminal = catchAsync(async (req, res, next) => {
     try {
         // First, delete related records in sentences
         const deleteSentencesQuery = `DELETE FROM sentences WHERE criminal_id = ${criminalId}`;
-        await db.query(deleteSentencesQuery);
+        await dbAdmin.query(deleteSentencesQuery);
 
         // Then, delete the criminal
         const deleteCriminalsQuery = `DELETE FROM criminals WHERE criminal_id = ${criminalId}`;
-        const result = await db.query(deleteCriminalsQuery);
+        const result = await dbAdmin.query(deleteCriminalsQuery);
 
         if (result.rowCount === 0) {
             return res.status(404).json({
@@ -77,11 +77,11 @@ export const deleteOfficer = catchAsync(async (req, res, next) => {
     try {
         // First, delete related records in crime_officers
         const deleteCrimeOfficersQuery = `DELETE FROM crime_officers WHERE officer_id = ${officerID}`;
-        await db.query(deleteCrimeOfficersQuery);
+        await dbAdmin.query(deleteCrimeOfficersQuery);
 
         // Then, delete the officer
         const deleteOfficerQuery = `DELETE FROM officers WHERE officer_id = ${officerID}`;
-        const result = await db.query(deleteOfficerQuery);
+        const result = await dbAdmin.query(deleteOfficerQuery);
 
         if (result.rowCount === 0) {
             return res.status(404).json({
@@ -109,11 +109,11 @@ export const deleteProbationOfficer = catchAsync(async (req, res, next) => {
     try {
         // First, delete related records in sentences
         const deleteSentencesQuery = `DELETE FROM sentences WHERE prob_id = ${probOfficerID}`;
-        await db.query(deleteSentencesQuery);
+        await dbAdmin.query(deleteSentencesQuery);
 
         // Then, delete the officer
         const deleteProbOfficerQuery = `DELETE FROM prob_officer WHERE prob_id = ${probOfficerID}`;
-        const result = await db.query(deleteProbOfficerQuery);
+        const result = await dbAdmin.query(deleteProbOfficerQuery);
 
         if (result.rowCount === 0) {
             return res.status(404).json({
@@ -138,7 +138,7 @@ export const deleteAppeal = catchAsync(async (req, res, next) => {
     const appealID = req.params.id;
     const query = `DELETE FROM appeals WHERE appeal_id = ${appealID}`;
     try {
-        const result = await db.query(query);
+        const result = await dbAdmin.query(query);
         res.status(200).json({
             message: 'Success, appeal deleted'
         });
@@ -157,7 +157,7 @@ export const deleteSentence = catchAsync(async (req, res, next) => {
     try {
         // Delete the sentence
         const deleteSentenceQuery = `DELETE FROM sentences WHERE sentence_id = ${sentenceID}`;
-        const result = await db.query(deleteSentenceQuery);
+        const result = await dbAdmin.query(deleteSentenceQuery);
 
         if (result.rowCount === 0) {
             return res.status(404).json({
@@ -184,7 +184,7 @@ export const deleteCrimeCharge = catchAsync(async (req, res, next) => {
     try {
         // Delete the crime charge
         const deleteCrimeChargeQuery = `DELETE FROM crime_charges WHERE charge_id = ${chargeID}`;
-        const result = await db.query(deleteCrimeChargeQuery);
+        const result = await dbAdmin.query(deleteCrimeChargeQuery);
 
         if (result.rowCount === 0) {
             return res.status(404).json({

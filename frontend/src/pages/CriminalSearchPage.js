@@ -221,6 +221,11 @@ const CriminalSearchPage = () => {
                     <th>Actions</th>
                   )
                 }
+                {
+                  userInfo && userInfo.isAdmin && (
+                    <th>Actions</th>
+                  )
+                }
               </tr>
             </thead>
             <tbody>

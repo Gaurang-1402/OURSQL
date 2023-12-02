@@ -172,10 +172,12 @@ const SentencePage = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Sentence Type</Form.Label>
                 <Form.Select className='input-box' value={sentenceType} onChange={e => setSentenceType(e.target.value)}>
+                <Form.Select className='input-box' value={sentenceType} onChange={e => setSentenceType(e.target.value)}>
                   <option value="">Select Type</option>
                   <option value="J">Jail</option>
                   <option value="H">House Arrest</option>
                   <option value="P">Probation</option>
+                </Form.Select>
                 </Form.Select>
               </Form.Group>
 
@@ -194,6 +196,7 @@ const SentencePage = () => {
               {/* Violations */}
               <Form.Group className="mb-3">
                 <Form.Label>Violations</Form.Label>
+                <Form.Control className='input-box' type="number" value={violations} onChange={e => setViolations(e.target.value)} placeholder="Enter number of violations" />
                 <Form.Control className='input-box' type="number" value={violations} onChange={e => setViolations(e.target.value)} placeholder="Enter number of violations" />
               </Form.Group>
 

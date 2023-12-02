@@ -202,7 +202,11 @@ const ProbationOfficerSearchPage = () => {
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Status</th>
-                <th>Actions</th>
+                {
+                  userInfo && userInfo.isAdmin && (
+                    <th>Actions</th>
+                  )
+                }
               </tr>
             </thead>
             <tbody>

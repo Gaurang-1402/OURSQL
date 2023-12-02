@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import catchAsync from './catchAsync.js';
-import db from '../config/db.js';
+import {dbAdmin} from '../config/db.js';
 
 const protect = catchAsync(async (req, res, next) => {
     let token;
@@ -14,7 +14,7 @@ const protect = catchAsync(async (req, res, next) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         // Verify token
         const query = `SELECT * FROM USERS WHERE user_id = ${decoded.id}`;
-        const results = await db.query(query);
+        const results = await dbAdmin.query(query);
 
         // The user is the first element of the first array in results
         const user = results[0][0];

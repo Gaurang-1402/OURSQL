@@ -1,5 +1,5 @@
 import catchAsync from '../utils/catchAsync.js'
-import db from '../config/db.js'
+import {dbAdmin} from '../config/db.js';
 import bcrypt from 'bcryptjs'
 import generateTokenSetCookie from '../utils/generateTokenSetCookie.js'
 
@@ -20,7 +20,7 @@ const loginUser = catchAsync(async (req, res) => {
         return;
     }
     const query = `SELECT * FROM USERS WHERE email = '${email}'`;
-    const results = await db.query(query);
+    const results = await dbAdmin.query(query);
 
     // The user is the first element of the first array in results
     const user = results[0][0];
@@ -58,7 +58,7 @@ const registerUser = catchAsync(async (req, res) => {
         return;
     }
 
-    const userExists = await db.query(`SELECT * FROM USERS WHERE email = '${email}'`);
+    const userExists = await dbAdmin.query(`SELECT * FROM USERS WHERE email = '${email}'`);
     if (userExists[0].length > 0) {
         res.status(400).json({
             message: 'User already exists',
@@ -75,7 +75,7 @@ const registerUser = catchAsync(async (req, res) => {
 
 
     try {
-        const isSuccess = await db.query(`INSERT INTO USERS (user_id, name, email, password, is_admin) VALUES ('${newId}', '${name}', '${email}', '${hashedPassword}', '${isAdmin === true ? 'Y' : 'N'}')`);
+        const isSuccess = await dbAdmin.query(`INSERT INTO USERS (user_id, name, email, password, is_admin) VALUES ('${newId}', '${name}', '${email}', '${hashedPassword}', '${isAdmin === true ? 'Y' : 'N'}')`);
         res.status(201).json({
             _id: newId,
             name: name,
@@ -114,7 +114,7 @@ const getUserProfile = catchAsync(async (req, res) => {
     const userId = req.user.user_id;
     const query = `SELECT * FROM USERS WHERE user_id = '${userId}'`;
     try {
-        const results = await db.query(query);
+        const results = await dbAdmin.query(query);
         const user = results[0][0];
         if (user) {
             res.json({
