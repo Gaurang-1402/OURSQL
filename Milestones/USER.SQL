@@ -1,5 +1,7 @@
+DROP TABLE IF EXISTS USERS;
+
 CREATE TABLE USERS (
-    user_id VARCHAR(36),
+    user_id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(100),
     email VARCHAR(100),
     password VARCHAR(1000),
@@ -27,4 +29,3 @@ VALUES (
         'N'
     );
     
-DROP TABLE IF EXISTS USERS;
