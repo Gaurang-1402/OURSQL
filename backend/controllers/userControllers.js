@@ -20,8 +20,12 @@ const loginUser = catchAsync(async (req, res) => {
         });
         return;
     }
+
+    await dbAdmin.query('START TRANSACTION;');
+
     const query = `SELECT * FROM USERS WHERE email = '${email}'`;
     const results = await dbAdmin.query(query);
+    await dbAdmin.query('COMMIT;');
 
     // The user is the first element of the first array in results
     const user = results[0][0];
@@ -76,7 +80,9 @@ const registerUser = catchAsync(async (req, res) => {
 
 
     try {
-        const isSuccess = await dbAdmin.query(`INSERT INTO USERS (user_id, name, email, password, is_admin) VALUES ('${newId}', '${name}', '${email}', '${hashedPassword}', '${isAdmin}')`);
+        await dbAdmin.query('START TRANSACTION;');
+        const isSuccess = await dbAdmin.query(`INSERT INTO USERS (user_id, name, email, password, is_admin) VALUES ('${newId}', '${name}', '${email}', '${hashedPassword}', '${isAdmin === true ? 'Y' : 'N'}')`);        
+        await dbAdmin.query('COMMIT;');
         res.status(201).json({
             _id: newId,
             name: name,
@@ -113,7 +119,11 @@ const logoutUser = catchAsync(async (req, res) => {
 // @access  Private
 const getUserProfile = catchAsync(async (req, res) => {
     const userId = req.user.user_id;
+    await dbAdmin.query('START TRANSACTION;');
+
     const query = `SELECT * FROM USERS WHERE user_id = '${userId}'`;
+    await dbAdmin.query('COMMIT;');
+
     try {
         const results = await dbAdmin.query(query);
         const user = results[0][0];
