@@ -337,7 +337,7 @@ export const getSentenceSearchResults = catchAsync(async (req, res, next) => {
 export const getCrimeChargeSearchResults = catchAsync(async (req, res, next) => {
     const { crime_id, crime_code, charge_status, payment_due_date } = req.body;
 
-    let query = 'SELECT * FROM crime_charges WHERE 1=1';
+    let query = 'SELECT * FROM crime_charges JOIN crime_codes ON crime_charges.crime_code = crime_codes.crime_code WHERE 1=1';
 
     if (crime_id) {
         query += ` AND crime_id = '${crime_id}'`;
