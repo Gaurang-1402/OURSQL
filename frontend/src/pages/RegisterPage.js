@@ -32,7 +32,7 @@ const RegisterPage = () => {
   const { search } = useLocation()
   const sp = new URLSearchParams(search)
   // get the redirect param from the url
-  const redirect = sp.get('redirect') || '/'
+  const redirect = sp.get('redirect') || '/login'
 
   useEffect(() => {
     if (userInfo) {
@@ -48,8 +48,8 @@ const RegisterPage = () => {
     }
     try {
       const res = await register({ email, name, password, isAdmin }).unwrap()
-      dispatch(setCredentials({ ...res }))
-      navigate(redirect)
+      // dispatch(setCredentials({ ...res }))
+      navigate('/login')
     } catch (error) {
 
       toast.error(error?.data?.message || error.data.error)
@@ -113,7 +113,7 @@ const RegisterPage = () => {
       </Form>
       <Row className='py-3'>
         <Col>
-          Already have account? <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>Register</Link>
+          Already have account? <Link to={redirect ? `/register?redirect=${redirect}` : '/login'}>Login</Link>
         </Col>
       </Row>
     </FormContainer>
