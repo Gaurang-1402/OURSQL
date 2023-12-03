@@ -4,7 +4,9 @@ import {dbAdmin, dbNonAdmin} from '../config/db.js';
 export const getCrimeSearchResults = catchAsync(async (req, res, next) => {
     const { criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date } = req.body;
 
-
+    console.log(criminal_id, classification, date_charged, status, hearing_date, appeal_cut_date);
+    
+    
     let query = 'SELECT * FROM crimes WHERE 1=1';
 
     if (criminal_id) {
@@ -30,19 +32,15 @@ export const getCrimeSearchResults = catchAsync(async (req, res, next) => {
     if (appeal_cut_date) {
         query += ` AND appeal_cut_date >= '${appeal_cut_date}'`;
     }
-
     
 
     try {
         let results;
         if (req.user && req.user.is_admin === 'Y') {
-            await dbAdmin.query('START TRANSACTION;');
             results = await dbAdmin.query(query);
-            await dbAdmin.query('COMMIT;');
-        } else {
-            await dbNonAdmin.query('START TRANSACTION;');
+
+        } else{
             results = await dbNonAdmin.query(query);
-            await dbNonAdmin.query('COMMIT;');
         }
 
         res.status(200).json({
@@ -61,12 +59,13 @@ export const getCrimeSearchResults = catchAsync(async (req, res, next) => {
 
 
 
+    // res.send('Crime Search Results');
 });
 
 export const getCriminalSearchResults = catchAsync(async (req, res, next) => {
     const { lastName, selectedLastNameFilter, firstName, selectedFirstNameFilter, zip, phone, selectedVStatus, selectedPStatus } = req.body;
 
-    let query = 'SELECT * FROM criminals JOIN alias ON criminals.criminal_id = alias.criminal_id WHERE 1=1';
+    let query = 'SELECT * FROM criminals LEFT JOIN alias ON criminals.criminal_id = alias.criminal_id WHERE 1=1';
 
     if (selectedVStatus) {
         query += ` AND v_status = '${selectedVStatus}'`;
@@ -99,13 +98,10 @@ export const getCriminalSearchResults = catchAsync(async (req, res, next) => {
     try {
         let results;
         if (req.user && req.user.is_admin === 'Y') {
-            await dbAdmin.query('START TRANSACTION;');
             results = await dbAdmin.query(query);
-            await dbAdmin.query('COMMIT;');
-        } else {
-            await dbNonAdmin.query('START TRANSACTION;');
+
+        } else{
             results = await dbNonAdmin.query(query);
-            await dbNonAdmin.query('COMMIT;');
         }
 
         res.status(200).json({
@@ -161,13 +157,10 @@ export const getOfficerSearchResults = catchAsync(async (req, res, next) => {
     try {
         let results;
         if (req.user && req.user.is_admin === 'Y') {
-            await dbAdmin.query('START TRANSACTION;');
             results = await dbAdmin.query(query);
-            await dbAdmin.query('COMMIT;');
-        } else {
-            await dbNonAdmin.query('START TRANSACTION;');
+
+        } else{
             results = await dbNonAdmin.query(query);
-            await dbNonAdmin.query('COMMIT;');
         }
 
         res.status(200).json({
@@ -188,6 +181,10 @@ export const getOfficerSearchResults = catchAsync(async (req, res, next) => {
 
 export const getProbationOfficerSearchResults = catchAsync(async (req, res, next) => {
     const { lastName, selectedLastNameFilter, firstName, selectedFirstNameFilter, zip, phone, email, selectedStatus } = req.body;
+
+    console.log(
+        lastName, selectedLastNameFilter, firstName, selectedFirstNameFilter, zip, phone, email, selectedStatus
+    );
 
     let query = 'SELECT * FROM prob_officer WHERE 1=1';
 
@@ -222,13 +219,10 @@ export const getProbationOfficerSearchResults = catchAsync(async (req, res, next
     try {
         let results;
         if (req.user && req.user.is_admin === 'Y') {
-            await dbAdmin.query('START TRANSACTION;');
             results = await dbAdmin.query(query);
-            await dbAdmin.query('COMMIT;');
-        } else {
-            await dbNonAdmin.query('START TRANSACTION;');
+
+        } else{
             results = await dbNonAdmin.query(query);
-            await dbNonAdmin.query('COMMIT;');
         }
 
         res.status(200).json({
@@ -252,6 +246,7 @@ export const getProbationOfficerSearchResults = catchAsync(async (req, res, next
 export const getAppealSearchResults = catchAsync(async (req, res, next) => {
     const { startHearingDate, startFilingDate, selectedStatus } = req.body;
 
+    console.log(startHearingDate, startFilingDate, selectedStatus);
     let query = 'SELECT * FROM appeals WHERE 1=1';
 
     if (startHearingDate) {
@@ -269,13 +264,10 @@ export const getAppealSearchResults = catchAsync(async (req, res, next) => {
     try {
         let results;
         if (req.user && req.user.is_admin === 'Y') {
-            await dbAdmin.query('START TRANSACTION;');
             results = await dbAdmin.query(query);
-            await dbAdmin.query('COMMIT;');
-        } else {
-            await dbNonAdmin.query('START TRANSACTION;');
+
+        } else{
             results = await dbNonAdmin.query(query);
-            await dbNonAdmin.query('COMMIT;');
         }
 
         res.status(200).json({
@@ -298,6 +290,7 @@ export const getAppealSearchResults = catchAsync(async (req, res, next) => {
 export const getSentenceSearchResults = catchAsync(async (req, res, next) => {
     const { type, start_date, end_date, violations } = req.body;
 
+    console.log(type, start_date, end_date, violations);
     let query = 'SELECT * FROM sentences WHERE 1=1';
 
     if (type) {
@@ -319,13 +312,10 @@ export const getSentenceSearchResults = catchAsync(async (req, res, next) => {
     try {
         let results;
         if (req.user && req.user.is_admin === 'Y') {
-            await dbAdmin.query('START TRANSACTION;');
             results = await dbAdmin.query(query);
-            await dbAdmin.query('COMMIT;');
-        } else {
-            await dbNonAdmin.query('START TRANSACTION;');
+
+        } else{
             results = await dbNonAdmin.query(query);
-            await dbNonAdmin.query('COMMIT;');
         }
 
         res.status(200).json({
@@ -354,6 +344,7 @@ export const getSentenceSearchResults = catchAsync(async (req, res, next) => {
 export const getCrimeChargeSearchResults = catchAsync(async (req, res, next) => {
     const { crime_id, crime_code, charge_status, payment_due_date } = req.body;
 
+    console.log(crime_id, crime_code, charge_status, payment_due_date);
     let query = 'SELECT * FROM crime_charges WHERE 1=1';
 
     if (crime_id) {
@@ -375,13 +366,10 @@ export const getCrimeChargeSearchResults = catchAsync(async (req, res, next) => 
     try {
         let results;
         if (req.user && req.user.is_admin === 'Y') {
-            await dbAdmin.query('START TRANSACTION;');
             results = await dbAdmin.query(query);
-            await dbAdmin.query('COMMIT;');
-        } else {
-            await dbNonAdmin.query('START TRANSACTION;');
+
+        } else{
             results = await dbNonAdmin.query(query);
-            await dbNonAdmin.query('COMMIT;');
         }
 
         res.status(200).json({
