@@ -13,7 +13,6 @@ const protect = catchAsync(async (req, res, next) => {
     }
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        console.log('decoded', decoded);
         // Verify token
         const query = `SELECT * FROM USERS WHERE user_id = ${decoded.id}`;
         const results = await dbAdmin.query(query);
