@@ -13,6 +13,8 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  // Add a new state for the is_admin checkbox
+  const [isAdmin, setIsAdmin] = useState('N'); // Default to 'N'
 
   const [name, setName] = useState('')
 
@@ -21,6 +23,9 @@ const RegisterPage = () => {
 
   const [register, { isLoading }] = useRegisterMutation()
 
+  const handleCheckboxChange = (e) => {
+    setIsAdmin(e.target.checked ? 'Y' : 'N');
+  }
   // get the user info from the store
   const { userInfo } = useSelector(state => state.auth)
 
@@ -42,7 +47,7 @@ const RegisterPage = () => {
       return
     }
     try {
-      const res = await register({ email, name, password }).unwrap()
+      const res = await register({ email, name, password, isAdmin }).unwrap()
       dispatch(setCredentials({ ...res }))
       navigate(redirect)
     } catch (error) {
@@ -87,11 +92,19 @@ const RegisterPage = () => {
         <Form.Group controlId='confirmPassword' className='my-3'>
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
-            type='confirmPassword'
+            type='password'
             placeholder='Confirm Password'
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></Form.Control>
+        </Form.Group>
+        <Form.Group controlId='isAdmin' className='my-3'>
+          <Form.Check
+            type='checkbox'
+            label='Is Admin'
+            checked={isAdmin === 'Y'}
+            onChange={handleCheckboxChange}
+          />
         </Form.Group>
         <Button type='submit' variant='primary' className='mt-2' disabled={isLoading}>
           Register

@@ -22,7 +22,7 @@ CREATE TABLE alias(
     alias_id NUMERIC(6),
     criminal_id NUMERIC(6),
     alias VARCHAR(20) DEFAULT 'N',
-    PRIMARY KEY (alias_id),
+    PRIMARY KEY (alias),
     FOREIGN KEY (criminal_id) REFERENCES criminals(criminal_id)
 );
 
@@ -139,5 +139,10 @@ CREATE TABLE appeals (
 );  
 
 
-
+CREATE TABLE deletion_log(
+	event_id INT AUTO_INCREMENT PRIMARY KEY,
+    table_name VARCHAR(100),
+    deleted_id NUMERIC(10),
+    delete_time TIME
+);
 

@@ -1,8 +1,9 @@
 import catchAsync from '../utils/catchAsync.js'
-import {dbAdmin} from '../config/db.js';
+import { dbAdmin } from '../config/db.js';
 import bcrypt from 'bcryptjs'
 import generateTokenSetCookie from '../utils/generateTokenSetCookie.js'
 
+import { v4 as uuidv4 } from 'uuid';
 
 const checkPassword = async (enteredPassword, userPassword) => {
     return await bcrypt.compare(enteredPassword, userPassword)
@@ -39,7 +40,7 @@ const loginUser = catchAsync(async (req, res) => {
     } else {
         res.status(401).json({
             message: 'Invalid email or password',
-        
+
         });
         throw new Error('Invalid email or password');
     }
@@ -62,7 +63,7 @@ const registerUser = catchAsync(async (req, res) => {
     if (userExists[0].length > 0) {
         res.status(400).json({
             message: 'User already exists',
-        });        
+        });
         return;
     }
 
@@ -71,11 +72,11 @@ const registerUser = catchAsync(async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Generate UUID for new user_id
-    const newId = crypto.randomUUID()
+    const newId = uuidv4();
 
 
     try {
-        const isSuccess = await dbAdmin.query(`INSERT INTO USERS (user_id, name, email, password, is_admin) VALUES ('${newId}', '${name}', '${email}', '${hashedPassword}', '${isAdmin === true ? 'Y' : 'N'}')`);
+        const isSuccess = await dbAdmin.query(`INSERT INTO USERS (user_id, name, email, password, is_admin) VALUES ('${newId}', '${name}', '${email}', '${hashedPassword}', '${isAdmin}')`);
         res.status(201).json({
             _id: newId,
             name: name,
