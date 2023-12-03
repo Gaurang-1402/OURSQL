@@ -76,8 +76,10 @@ const registerUser = catchAsync(async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Generate UUID for new user_id
-    const newId = uuidv4();
+    const result = await dbAdmin.query('SELECT MAX(user_id) as lastId FROM USERS')
+    console.log(result[0][0].lastId);
 
+    const newId = result[0][0].lastId + 1;
 
     try {
         await dbAdmin.query('START TRANSACTION;');
