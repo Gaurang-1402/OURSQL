@@ -84,7 +84,7 @@ const registerUser = catchAsync(async (req, res) => {
     try {
         await dbAdmin.query('START TRANSACTION;');
 
-        const isSuccess = await dbAdmin.query(`INSERT INTO USERS (user_id, name, email, password, is_admin) VALUES ('${newId}', '${name}', '${email}', '${hashedPassword}', '${isAdmin === true ? 'Y' : 'N'}')`);
+        const isSuccess = await dbAdmin.query(`INSERT INTO USERS (user_id, name, email, password, is_admin) VALUES (${newId}, '${name}', '${email}', '${hashedPassword}', '${isAdmin}')`);
         await dbAdmin.query('COMMIT;');
 
         res.status(201).json({
