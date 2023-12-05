@@ -244,7 +244,7 @@ const CriminalSearchPage = () => {
                               <FaEdit />
                             </Button>
                           </Link>
-                          <DeleteModal id={criminal.prob_id} entity={"criminal"} onDeleteSuccess={handleDeleteSuccess} onDeleteError={handleDeleteError} />
+                          <DeleteModal id={criminal.criminal_id} entity={"criminal"} onDeleteSuccess={handleDeleteSuccess} onDeleteError={handleDeleteError} />
                         </td>
                       )
                     }

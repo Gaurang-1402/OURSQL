@@ -31,7 +31,7 @@ export const updateCriminal = catchAsync(async (req, res, next) => {
     const { last, first, zip, phone, p_status, v_status } = req.body;
 
 
-    const query = `UPDATE criminals SET last = '${last}', first = '${first}', zip = '${zip}', phone = '${phone}', v_status = '${v_status}', p_status = '${p_status}' WHERE criminal_ids = ${criminalId}`;
+    const query = `UPDATE criminals SET last = '${last}', first = '${first}', zip = '${zip}', phone = '${phone}', v_status = '${v_status}', p_status = '${p_status}' WHERE criminal_id = ${criminalId}`;
     try {
         await dbAdmin.query('START TRANSACTION;');
         const results = await dbAdmin.query(query);
@@ -80,7 +80,7 @@ export const updateProbationOfficer = catchAsync(async (req, res, next) => {
     const { last, first, zip, phone, email, status } = req.body;
 
 
-    const query = `UPDATE officers SET last = '${last}', first = '${first}', zip = '${zip}', phone = '${phone}', email = '${email}', status = '${status}' WHERE officer_id = ${probOfficerId}`;
+    const query = `UPDATE prob_officer SET last = '${last}', first = '${first}', zip = '${zip}', phone = '${phone}', email = '${email}', status = '${status}' WHERE prob_id = ${probOfficerId}`;
     try {
         await dbAdmin.query('START TRANSACTION;');
         const results = await dbAdmin.query(query);
@@ -146,11 +146,12 @@ export const updateSentence = catchAsync(async (req, res, next) => {
 })
 
 export const updateCrimeCharge = catchAsync(async (req, res, next) => {
-    const { crime_id, crime_code, charge_status, payment_due_date } = req.body;
+    const { crime_id, crime_code, charge_status, fine_amount, court_fee, amount_paid, payment_due_date} = req.body;
     const chargeId = req.params.id;
 
 
-    const query = `UPDATE crime_charges SET crime_id = ${crime_id}, crime_code = '${crime_code}', charge_status = '${charge_status}', payment_due_date = '${payment_due_date}' WHERE charge_id = ${chargeId}`;
+    const query = `UPDATE crime_charges SET crime_id = ${crime_id}, crime_code = '${crime_code}', charge_status = '${charge_status}',
+            fine_amount = '${fine_amount}', court_fee = '${court_fee}', amount_paid = '${amount_paid}', payment_due_date = '${payment_due_date}' WHERE charge_id = ${chargeId}`;
     try {
         await dbAdmin.query('START TRANSACTION;');
         const results = await dbAdmin.query(query);

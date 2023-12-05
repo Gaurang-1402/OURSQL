@@ -64,7 +64,8 @@ export const getCrimeSearchResults = catchAsync(async (req, res, next) => {
 export const getCriminalSearchResults = catchAsync(async (req, res, next) => {
     const { lastName, selectedLastNameFilter, firstName, selectedFirstNameFilter, zip, phone, selectedVStatus, selectedPStatus } = req.body;
 
-    let query = 'SELECT * FROM criminals LEFT JOIN alias ON criminals.criminal_id = alias.criminal_id WHERE 1=1';
+    let query = `SELECT c.criminal_id, c.last, c.first, c.street, c.city, c.state, c.zip, c.phone, c.v_status, c.p_status, alias.alias
+                FROM criminals AS c LEFT JOIN alias ON c.criminal_id = alias.criminal_id WHERE 1=1`;
 
     if (selectedVStatus) {
         query += ` AND v_status = '${selectedVStatus}'`;
@@ -98,6 +99,8 @@ export const getCriminalSearchResults = catchAsync(async (req, res, next) => {
         let results;
         if (req.user && req.user.is_admin === 'Y') {
             results = await dbAdmin.query(query);
+
+            console.log(results);
 
         } else{
             results = await dbNonAdmin.query(query);
@@ -352,7 +355,7 @@ export const getCrimeChargeSearchResults = catchAsync(async (req, res, next) => 
     }
 
     if (payment_due_date) {
-        query += ` AND payment_due_date = '${payment_due_date}'`;
+        query += ` AND payment_due_date <= '${payment_due_date}'`;
     }
 
     try {
