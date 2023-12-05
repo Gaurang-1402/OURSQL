@@ -48,7 +48,6 @@ app.use('/api', getRouter);
 
 
 if (process.env.NODE_ENV === 'production') {
-    console.log(path.join(__dirname, '/frontend/build'))
     app.use(express.static(path.join(__dirname, '../frontend/build')));
 
     // After defining all other API routes
