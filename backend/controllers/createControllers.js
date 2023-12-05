@@ -137,7 +137,7 @@ export const createCriminal = catchAsync(async (req, res, next) => {
     const prevId = await dbAdmin.query(`SELECT MAX(criminal_id) as lastId FROM criminals`);
     const newId = prevId[0][0].lastId + 1;
 
-    const query = `INSERT INTO criminal (criminal_id, last, first, zip, phone, v_status, p_status) VALUES (${newId}, '${last}', '${first}', '${zip}', '${phone}', '${v_status}', '${p_status}')`;
+    const query = `INSERT INTO criminals (criminal_id, last, first, zip, phone, v_status, p_status) VALUES (${newId}, '${last}', '${first}', '${zip}', '${phone}', '${v_status}', '${p_status}')`;
     try {
         await dbAdmin.query('START TRANSACTION;');
         const results = await dbAdmin.query(query);

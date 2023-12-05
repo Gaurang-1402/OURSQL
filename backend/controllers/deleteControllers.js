@@ -54,6 +54,30 @@ export const deleteCriminal = catchAsync(async (req, res, next) => {
         const deleteSentencesQuery = `DELETE FROM sentences WHERE criminal_id = ${criminalId}`;
         await dbAdmin.query(deleteSentencesQuery);
 
+        const deleteAliasQuery = `DELETE FROM alias WHERE criminal_id = ${criminalId}`;
+        await dbAdmin.query(deleteAliasQuery);
+
+        const correspondingCrime = `SELECT crime_id FROM crimes WHERE criminal_id = ${criminalId}`;
+        const crimeResult = await dbAdmin.query(correspondingCrime);
+        const crimeId = crimeResult[0][0]?.crime_id;
+
+        if (crimeId) {
+
+            const deleteChargesQuery = `DELETE FROM crime_charges WHERE crime_id = ${crimeId}`;
+            await dbAdmin.query(deleteChargesQuery);
+
+            const deleteAppealsQuery = `DELETE FROM appeals WHERE crime_id = ${crimeId}`;
+            await dbAdmin.query(deleteAppealsQuery);
+
+            const deleteCrimeOfficersQuery = `DELETE FROM crime_officers WHERE crime_id = ${crimeId}`;
+            await dbAdmin.query(deleteCrimeOfficersQuery);
+
+            // Then, delete the crime
+            const deleteCrimeQuery = `DELETE FROM crimes WHERE crime_id = ${crimeId}`;
+            await dbAdmin.query(deleteCrimeQuery);
+
+        }
+
         // Then, delete the criminal
         const deleteCriminalsQuery = `DELETE FROM criminals WHERE criminal_id = ${criminalId}`;
         const result = await dbAdmin.query(deleteCriminalsQuery);

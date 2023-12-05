@@ -28,7 +28,7 @@ const CriminalPage = () => {
 
   const [isUpdate, setIsUpdate] = useState(false);
 
-  // get prob officer data
+  // get criminal data
   const getCriminal = async () => {
     if (criminalId) { // Use officerId instead of appealId
       try {
@@ -134,9 +134,9 @@ const CriminalPage = () => {
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label>
+              <Form.Label>Violent Offender Status</Form.Label>
               <Form.Select
-                name="status"
+                name="v_status"
                 value={criminalDetails.v_status}
                 onChange={handleChange}
                 className='input-box'
@@ -147,9 +147,9 @@ const CriminalPage = () => {
               </Form.Select>
             </Form.Group>
             <Form.Group className="mb-5">
-              <Form.Label>Status</Form.Label>
+              <Form.Label>Probation Status</Form.Label>
               <Form.Select
-                name="status"
+                name="p_status"
                 value={criminalDetails.p_status}
                 onChange={handleChange}
                 className='input-box'
