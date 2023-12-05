@@ -176,6 +176,7 @@ const CrimeChargeSearchPage = () => {
               <th>Charge ID</th>
               <th>Crime ID</th>
               <th>Crime Code</th>
+              <th>Code Description</th>
               <th>Charge Status</th>
               <th>Fine Amount</th>
               <th>Court Fee</th>
@@ -193,6 +194,7 @@ const CrimeChargeSearchPage = () => {
                 <td>{charge.charge_id}</td>
                 <td>{charge.crime_id}</td>
                 <td>{charge.crime_code}</td>
+                <td>{charge.code_description}</td>
                 <td>{charge.charge_status}</td>
                 <td>{charge.fine_amount}</td>
                 <td>{charge.court_fee}</td>
