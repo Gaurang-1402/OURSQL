@@ -51,9 +51,11 @@ if (process.env.NODE_ENV === 'production') {
     console.log(path.join(__dirname, '/frontend/build'))
     app.use(express.static(path.join(__dirname, '../frontend/build')));
 
+    // After defining all other API routes
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'));
-    })
+        res.sendFile(path.resolve(__dirname, '..', 'frontend', 'build', 'index.html'));
+    });
+
 }
 
 else {
