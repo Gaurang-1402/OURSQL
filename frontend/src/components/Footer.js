@@ -8,6 +8,9 @@ const Footer = () => {
         <Container>
             <Row>
                 <Col className='text-center py-3'>
+                    <h4>
+                        Made by Gaurang Ruparelia, Eric Xu, and Carina Yan @ NYU
+                    </h4>
                     &copy; Panopticon {currentYear}
                 </Col>
             </Row>
