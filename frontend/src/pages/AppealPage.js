@@ -123,7 +123,7 @@ const AppealPage = () => {
     <>
       <h1>{isUpdate ? 'Appeal Update' : 'Appeal Create'}</h1>      <div className="App" style={{ marginTop: '15vh' }}>
         <Row>
-          <Col md={9}>
+          <Col md={7}>
             <Form onSubmit={isUpdate ? handleUpdateSubmit : handleCreateSubmit}>
 
               <Form.Group className="mb-5">
